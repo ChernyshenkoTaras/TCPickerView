@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary          = 'Picker view popup with multiply rows selection written in Swift'
 
   s.description      = <<-DESC
-    Picker view popup with multiply rows selection written in Swift
+    Picker view popup with ability to select multiply rows written in Swift
                        DESC
 
   s.homepage         = 'https://github.com/ChernyshenkoTaras/TCPickerView'
