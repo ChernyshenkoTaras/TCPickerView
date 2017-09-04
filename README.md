@@ -1,7 +1,7 @@
 # TCPickerView
 Picker view popup with multiply rows selection written in Swift. 
 
-![](https://github.com/ChernyshenkoTaras/TCPickerView/blob/master/TCPickerView/TCPickerView/Images/PickerView.gif?raw=true)
+![](https://github.com/ChernyshenkoTaras/TCPickerView/blob/master/TCPickerView/TCPickerView/Images/PickerView_1.gif?raw=true)
 
 ## Requirements
 
