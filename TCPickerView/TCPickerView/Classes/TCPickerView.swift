@@ -11,8 +11,8 @@ import UIKit
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     public struct Value {
-        let title: String
-        var isChecked: Bool
+        public let title: String
+        public var isChecked: Bool
         
         public init(title: String, isChecked: Bool = false) {
             self.title = title
