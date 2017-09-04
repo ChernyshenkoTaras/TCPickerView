@@ -10,7 +10,7 @@ import UIKit
 
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
-    struct Value {
+    public struct Value {
         let title: String
         var isChecked: Bool
         
