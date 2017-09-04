@@ -78,7 +78,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    var values: [Value] = [] {
+    open var values: [Value] = [] {
         didSet {
             self.tableView?.reloadData()
         }
