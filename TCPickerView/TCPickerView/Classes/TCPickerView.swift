@@ -14,7 +14,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         let title: String
         var isChecked: Bool
         
-        init(title: String, isChecked: Bool = false) {
+        public init(title: String, isChecked: Bool = false) {
             self.title = title
             self.isChecked = isChecked
         }
