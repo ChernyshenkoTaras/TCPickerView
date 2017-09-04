@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
+open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     struct Value {
         let title: String
@@ -78,7 +78,7 @@ class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    open var values: [Value] = [] {
+    var values: [Value] = [] {
         didSet {
             self.tableView?.reloadData()
         }
@@ -285,12 +285,12 @@ class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: UITableViewDataSource methods
     
-    func tableView(_ tableView: UITableView,
+    public func tableView(_ tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
         return self.values.count
     }
     
-    func tableView(_ tableView: UITableView,
+    public func tableView(_ tableView: UITableView,
         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
             self.tableViewCellIdentifier,
@@ -308,7 +308,7 @@ class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: UITableViewDelegate methods
     
-    func tableView(_ tableView: UITableView,
+    public func tableView(_ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         var values = self.values
