@@ -8,11 +8,21 @@
 
 import UIKit
 
-class TCPickerView: UIView {
+class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
-    fileprivate let font = UIFont(name: "Helvetica", size: 15.0)
-    fileprivate let boldFont = UIFont(name: "Helvetica-Bold", size: 15.0)
+    struct Value {
+        let title: String
+        var isChecked: Bool
+        
+        init(title: String, isChecked: Bool = false) {
+            self.title = title
+            self.isChecked = isChecked
+        }
+    }
     
+    public typealias Completion = ([Int]) -> Void
+    
+    fileprivate let tableViewCellIdentifier = "TableViewCell"
     fileprivate var titleLabel: UILabel?
     fileprivate var doneButton: UIButton?
     fileprivate var closeButton: UIButton?
@@ -68,10 +78,19 @@ class TCPickerView: UIView {
         }
     }
     
+    open var values: [Value] = [] {
+        didSet {
+            self.tableView?.reloadData()
+        }
+    }
+
+    open var completion: Completion?
+    
     public init() {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         let screenHeight: CGFloat = UIScreen.main.bounds.height
-        let frame: CGRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        let frame: CGRect = CGRect(x: 0, y: 0, width: screenWidth,
+            height: screenHeight)
         super.init(frame: frame)
         self.initialize()
     }
@@ -90,7 +109,7 @@ class TCPickerView: UIView {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         let screenHeight: CGFloat = UIScreen.main.bounds.height
         let width: CGFloat = screenWidth - 84
-        let height: CGFloat = 350
+        let height: CGFloat = 400
         let x: CGFloat = 32
         let y: CGFloat = (screenHeight - height) / 2
         let frame: CGRect = CGRect(x: x, y: y, width: width, height: height)
@@ -100,6 +119,11 @@ class TCPickerView: UIView {
         self.closeButton = UIButton(frame: CGRect.zero)
         self.titleLabel = UILabel(frame: CGRect.zero)
         self.tableView = UITableView(frame: CGRect.zero)
+        self.tableView?.register(TCPickerTableViewCell.self,
+            forCellReuseIdentifier: self.tableViewCellIdentifier)
+        self.tableView?.tableFooterView = UIView()
+        self.tableView?.dataSource = self
+        self.tableView?.delegate = self
         
         self.doneButton?.addTarget(self, action: #selector(TCPickerView.done),
             for: .touchUpInside)
@@ -174,7 +198,6 @@ class TCPickerView: UIView {
             attribute: .height, multiplier: 1.0, constant: 50))
         
         //tableView
-        
         containerView.addConstraint(NSLayoutConstraint(item: containerView,
             attribute: .trailing, relatedBy: .equal, toItem: tableView,
             attribute: .trailing, multiplier: 1.0, constant: 0))
@@ -211,7 +234,8 @@ class TCPickerView: UIView {
             blue: 218/255, alpha: 1)
         self.titleFont = UIFont(name: "Helvetica-Bold", size: 15.0)
         self.buttonFont = UIFont(name: "Helvetica", size: 15.0)
-        self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView?.separatorInset = UIEdgeInsets(
+            top: 0, left: 0, bottom: 0, right: 0)
         self.tableView?.rowHeight = 50
     }
     
@@ -238,7 +262,14 @@ class TCPickerView: UIView {
     }
     
     @objc private func done() {
-        print("Done")
+        var indexes: [Int] = []
+        for i in 0..<self.values.count {
+            if self.values[i].isChecked {
+                indexes.append(i)
+            }
+        }
+        self.completion?(indexes)
+        self.close()
     }
     
     @objc private func close() {
@@ -250,5 +281,38 @@ class TCPickerView: UIView {
         }) { (isFinished) in
             self.removeFromSuperview()
         }
+    }
+    
+    //MARK: UITableViewDataSource methods
+    
+    func tableView(_ tableView: UITableView,
+        numberOfRowsInSection section: Int) -> Int {
+        return self.values.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+            self.tableViewCellIdentifier,
+            for: indexPath) as? TCPickerTableViewCell else {
+            assertionFailure("cell doesn't init")
+            return UITableViewCell()
+        }
+        let value = self.values[indexPath.row]
+        cell.viewModel = TCPickerTableViewCell.ViewModel(
+            title: value.title,
+            isChecked: value.isChecked
+        )
+        return cell
+    }
+    
+    //MARK: UITableViewDelegate methods
+    
+    func tableView(_ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        var values = self.values
+        values[indexPath.row].isChecked = !values[indexPath.row].isChecked
+        self.values = values
     }
 }
