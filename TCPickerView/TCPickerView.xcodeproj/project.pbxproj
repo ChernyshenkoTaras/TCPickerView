@@ -14,10 +14,10 @@
 		2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */; };
 		2F6330971F5D6DBA0086584B /* TCPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330961F5D6DBA0086584B /* TCPickerView.swift */; };
 		2F6330991F5D8C140086584B /* TCPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */; };
-		2F63309D1F5D92DD0086584B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F63309C1F5D92DD0086584B /* Media.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F1871821F5EB9780061DD84 /* checkmark_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_icon.png; sourceTree = "<group>"; };
 		2F6330801F5D6D830086584B /* TCPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6330831F5D6D830086584B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F6330851F5D6D830086584B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,7 +27,6 @@
 		2F63308F1F5D6D830086584B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F6330961F5D6DBA0086584B /* TCPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPickerView.swift; sourceTree = "<group>"; };
 		2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPickerTableViewCell.swift; sourceTree = "<group>"; };
-		2F63309C1F5D92DD0086584B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +59,6 @@
 		2F6330821F5D6D830086584B /* TCPickerView */ = {
 			isa = PBXGroup;
 			children = (
-				2F63309B1F5D92CA0086584B /* Assets */,
 				2F6330951F5D6D9E0086584B /* Classes */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
@@ -75,18 +73,11 @@
 		2F6330951F5D6D9E0086584B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F1871821F5EB9780061DD84 /* checkmark_icon.png */,
 				2F6330961F5D6DBA0086584B /* TCPickerView.swift */,
 				2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		2F63309B1F5D92CA0086584B /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				2F63309C1F5D92DD0086584B /* Media.xcassets */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +141,6 @@
 			files = (
 				2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */,
 				2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */,
-				2F63309D1F5D92DD0086584B /* Media.xcassets in Resources */,
 				2F6330891F5D6D830086584B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
