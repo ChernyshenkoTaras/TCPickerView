@@ -18,14 +18,8 @@ class TCPickerTableViewCell: UITableViewCell {
     var viewModel: ViewModel? {
         didSet {
             self.titleLabel?.text = self.viewModel?.title ?? ""
-            var image = UIImage()
-            let podBundle = Bundle(for: TCPickerView.self)
-            if let url = podBundle.url(forResource: "TCPickerView", withExtension: "bundle") {
-                let bundle = Bundle(url: url)
-                image = UIImage(named: "checkmark_icon", in: bundle, compatibleWith: nil)!
-            }
             self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
-                image : UIImage()
+                self.checkmark : UIImage()
         }
     }
     
@@ -33,9 +27,18 @@ class TCPickerTableViewCell: UITableViewCell {
         super.layoutSubviews()
         self.titleLabel?.text = self.viewModel?.title ?? ""
         self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
-            UIImage(named: "checkmark_icon") : UIImage()
+            self.checkmark : UIImage()
     }
     
+    private var checkmark: UIImage {
+        var image = UIImage()
+        let podBundle = Bundle(for: TCPickerView.self)
+        if let url = podBundle.url(forResource: "TCPickerView", withExtension: "bundle") {
+            let bundle = Bundle(url: url)
+            image = UIImage(named: "checkmark_icon", in: bundle, compatibleWith: nil)!
+        }
+        return image
+    }
     private var titleLabel: UILabel?
     private var checkmarkImageView: UIImageView?
     
