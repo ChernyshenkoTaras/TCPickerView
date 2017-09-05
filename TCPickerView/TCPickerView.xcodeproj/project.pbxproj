@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1871871F5EBF910061DD84 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F1871861F5EBF910061DD84 /* Media.xcassets */; };
 		2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330831F5D6D830086584B /* AppDelegate.swift */; };
 		2F6330861F5D6D830086584B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330851F5D6D830086584B /* ViewController.swift */; };
 		2F6330891F5D6D830086584B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6330871F5D6D830086584B /* Main.storyboard */; };
@@ -17,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F1871851F5EBC850061DD84 /* checkmark_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_icon.png; sourceTree = "<group>"; };
+		2F1871861F5EBF910061DD84 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		2F6330801F5D6D830086584B /* TCPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6330831F5D6D830086584B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F6330851F5D6D830086584B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +44,7 @@
 		2F1871841F5EBC850061DD84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2F1871851F5EBC850061DD84 /* checkmark_icon.png */,
+				2F1871861F5EBF910061DD84 /* Media.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -149,6 +150,7 @@
 			files = (
 				2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */,
 				2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */,
+				2F1871871F5EBF910061DD84 /* Media.xcassets in Resources */,
 				2F6330891F5D6D830086584B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

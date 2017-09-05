@@ -19,7 +19,7 @@ class TCPickerTableViewCell: UITableViewCell {
         didSet {
             self.titleLabel?.text = self.viewModel?.title ?? ""
             let bundle = Bundle(for: TCPickerView.self)
-            let image =  UIImage(named: "checkmark_icon", in: bundle, compatibleWith: nil)
+            let image = UIImage(named: "checkmark_icon", in: bundle, compatibleWith: nil)!
             self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
                 image : UIImage()
         }
