@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F1871821F5EB9780061DD84 /* checkmark_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_icon.png; sourceTree = "<group>"; };
+		2F1871851F5EBC850061DD84 /* checkmark_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_icon.png; sourceTree = "<group>"; };
 		2F6330801F5D6D830086584B /* TCPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6330831F5D6D830086584B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F6330851F5D6D830086584B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +40,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1871841F5EBC850061DD84 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2F1871851F5EBC850061DD84 /* checkmark_icon.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		2F6330771F5D6D830086584B = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +67,7 @@
 		2F6330821F5D6D830086584B /* TCPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				2F1871841F5EBC850061DD84 /* Resources */,
 				2F6330951F5D6D9E0086584B /* Classes */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
@@ -73,7 +82,6 @@
 		2F6330951F5D6D9E0086584B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2F1871821F5EB9780061DD84 /* checkmark_icon.png */,
 				2F6330961F5D6DBA0086584B /* TCPickerView.swift */,
 				2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */,
 			);
