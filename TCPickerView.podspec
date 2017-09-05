@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'TCPickerView/TCPickerView/Classes/**/*'
   s.resources = 'TCPickerView/TCPickerView/Resources/*.xcassets'
+  s.resource_bundle = {'TCPickerView' => ['Resources/**/*.{xcassets}']}
 end
