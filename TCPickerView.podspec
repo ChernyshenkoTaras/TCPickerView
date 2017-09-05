@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'TCPickerView/TCPickerView/Classes/**/*'
-  s.resources = 'TCPickerView/TCPickerView/Resources/*.xcassets'
-  s.ios.resource_bundle = {'TCPickerView' => ['TCPickerView/Resources/**/*.{xcassets}']}
+  s.ios.resource_bundle = {'TCPickerView' => ['TCPickerView/TCPickerView/Resources/**/*.{xcassets}']}
 end
