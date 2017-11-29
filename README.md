@@ -55,6 +55,10 @@ class ViewController: UIViewController {
 }
 ```
 
+## Contributing to this project
+
+If you have feature requests or bug reports, feel free to help out by sending pull requests or create issues.
+
 ## License
 
 This code is distributed under the terms and conditions of the [MIT license](LICENSE).
