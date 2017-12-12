@@ -36,6 +36,8 @@ class TCPickerTableViewCell: UITableViewCell {
         if let url = podBundle.url(forResource: "TCPickerView", withExtension: "bundle") {
             let bundle = Bundle(url: url)
             image = UIImage(named: "checkmark_icon", in: bundle, compatibleWith: nil)!
+        } else {
+            return UIImage(named: "checkmark_icon")!
         }
         return image
     }

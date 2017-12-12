@@ -1,0 +1,6 @@
+framework module TCPickerView {
+  umbrella header "TCPickerView-umbrella.h"
+
+  export *
+  module * { export * }
+}

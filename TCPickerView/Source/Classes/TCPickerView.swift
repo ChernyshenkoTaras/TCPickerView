@@ -8,7 +8,17 @@
 
 import UIKit
 
+public protocol TCPickerViewDelegate: class {
+    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int)
+}
+
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
+    
+    public enum Mode {
+        case none
+        case single
+        case multiply
+    }
     
     public struct Value {
         public let title: String
@@ -21,7 +31,6 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     public typealias Completion = ([Int]) -> Void
-    
     fileprivate let tableViewCellIdentifier = "TableViewCell"
     fileprivate var titleLabel: UILabel?
     fileprivate var doneButton: UIButton?
@@ -83,8 +92,9 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
             self.tableView?.reloadData()
         }
     }
-
+    open weak var delegate: TCPickerViewDelegate?
     open var completion: Completion?
+    open var selection: Mode = .multiply
     
     public init() {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
@@ -237,6 +247,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         self.tableView?.separatorInset = UIEdgeInsets(
             top: 0, left: 0, bottom: 0, right: 0)
         self.tableView?.rowHeight = 50
+        self.tableView?.separatorStyle = .none
     }
     
     open func show() {
@@ -310,9 +321,19 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         var values = self.values
-        values[indexPath.row].isChecked = !values[indexPath.row].isChecked
+        switch self.selection {
+            case .none: return
+            case .single:
+                for i in 0..<values.count {
+                    values[i].isChecked = false
+                }
+                values[indexPath.row].isChecked = true
+            case .multiply:
+                values[indexPath.row].isChecked = !values[indexPath.row].isChecked
+        }
         self.values = values
+        self.delegate?.pickerView(self, didSelectRowAtIndex: indexPath.row)
     }
 }

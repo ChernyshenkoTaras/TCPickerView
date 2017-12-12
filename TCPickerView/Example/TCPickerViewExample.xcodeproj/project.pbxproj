@@ -7,27 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F1871871F5EBF910061DD84 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F1871861F5EBF910061DD84 /* Media.xcassets */; };
+		0578BBBA47E0AC183DECF4CF /* Pods_TCPickerViewExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */; };
 		2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330831F5D6D830086584B /* AppDelegate.swift */; };
 		2F6330861F5D6D830086584B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330851F5D6D830086584B /* ViewController.swift */; };
 		2F6330891F5D6D830086584B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6330871F5D6D830086584B /* Main.storyboard */; };
 		2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308A1F5D6D830086584B /* Assets.xcassets */; };
 		2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */; };
-		2F6330971F5D6DBA0086584B /* TCPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330961F5D6DBA0086584B /* TCPickerView.swift */; };
-		2F6330991F5D8C140086584B /* TCPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F1871861F5EBF910061DD84 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		2F6330801F5D6D830086584B /* TCPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F6330801F5D6D830086584B /* TCPickerViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCPickerViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6330831F5D6D830086584B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F6330851F5D6D830086584B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2F6330881F5D6D830086584B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F63308A1F5D6D830086584B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F63308D1F5D6D830086584B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F63308F1F5D6D830086584B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F6330961F5D6DBA0086584B /* TCPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPickerView.swift; sourceTree = "<group>"; };
-		2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPickerTableViewCell.swift; sourceTree = "<group>"; };
+		545A352FB6EEF45689F1E140 /* Pods-TCPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.release.xcconfig"; sourceTree = "<group>"; };
+		6BA6994F974C6B1A18114BAA /* Pods_TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78271278690115EFA7B6D75A /* Pods-TCPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.debug.xcconfig"; sourceTree = "<group>"; };
+		B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D80C568EFC6FDFA0382953FA /* Pods-TCPickerViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerViewExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample.debug.xcconfig"; sourceTree = "<group>"; };
+		DF49581795309993C432083C /* Pods-TCPickerViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerViewExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,18 +36,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0578BBBA47E0AC183DECF4CF /* Pods_TCPickerViewExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F1871841F5EBC850061DD84 /* Resources */ = {
+		1D31E4933F010D66E04C4E1F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2F1871861F5EBF910061DD84 /* Media.xcassets */,
+				78271278690115EFA7B6D75A /* Pods-TCPickerView.debug.xcconfig */,
+				545A352FB6EEF45689F1E140 /* Pods-TCPickerView.release.xcconfig */,
+				D80C568EFC6FDFA0382953FA /* Pods-TCPickerViewExample.debug.xcconfig */,
+				DF49581795309993C432083C /* Pods-TCPickerViewExample.release.xcconfig */,
 			);
-			path = Resources;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		2F6330771F5D6D830086584B = {
@@ -54,13 +59,15 @@
 			children = (
 				2F6330821F5D6D830086584B /* TCPickerView */,
 				2F6330811F5D6D830086584B /* Products */,
+				1D31E4933F010D66E04C4E1F /* Pods */,
+				F65BC6F9159B8E9D49AA973E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		2F6330811F5D6D830086584B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F6330801F5D6D830086584B /* TCPickerView.app */,
+				2F6330801F5D6D830086584B /* TCPickerViewExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,8 +75,6 @@
 		2F6330821F5D6D830086584B /* TCPickerView */ = {
 			isa = PBXGroup;
 			children = (
-				2F1871841F5EBC850061DD84 /* Resources */,
-				2F6330951F5D6D9E0086584B /* Classes */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
 				2F6330871F5D6D830086584B /* Main.storyboard */,
@@ -80,33 +85,36 @@
 			path = TCPickerView;
 			sourceTree = "<group>";
 		};
-		2F6330951F5D6D9E0086584B /* Classes */ = {
+		F65BC6F9159B8E9D49AA973E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2F6330961F5D6DBA0086584B /* TCPickerView.swift */,
-				2F6330981F5D8C140086584B /* TCPickerTableViewCell.swift */,
+				6BA6994F974C6B1A18114BAA /* Pods_TCPickerView.framework */,
+				B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */,
 			);
-			path = Classes;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2F63307F1F5D6D830086584B /* TCPickerView */ = {
+		2F63307F1F5D6D830086584B /* TCPickerViewExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2F6330921F5D6D830086584B /* Build configuration list for PBXNativeTarget "TCPickerView" */;
+			buildConfigurationList = 2F6330921F5D6D830086584B /* Build configuration list for PBXNativeTarget "TCPickerViewExample" */;
 			buildPhases = (
+				C4C439CCE6BF427BC221DE50 /* [CP] Check Pods Manifest.lock */,
 				2F63307C1F5D6D830086584B /* Sources */,
 				2F63307D1F5D6D830086584B /* Frameworks */,
 				2F63307E1F5D6D830086584B /* Resources */,
+				D2AEE94ACE1AD6B65DD559F5 /* [CP] Embed Pods Frameworks */,
+				48BC619DC78A038882941A32 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TCPickerView;
+			name = TCPickerViewExample;
 			productName = TCPickerView;
-			productReference = 2F6330801F5D6D830086584B /* TCPickerView.app */;
+			productReference = 2F6330801F5D6D830086584B /* TCPickerViewExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -125,7 +133,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2F63307B1F5D6D830086584B /* Build configuration list for PBXProject "TCPickerView" */;
+			buildConfigurationList = 2F63307B1F5D6D830086584B /* Build configuration list for PBXProject "TCPickerViewExample" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -138,7 +146,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F63307F1F5D6D830086584B /* TCPickerView */,
+				2F63307F1F5D6D830086584B /* TCPickerViewExample */,
 			);
 		};
 /* End PBXProject section */
@@ -150,12 +158,68 @@
 			files = (
 				2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */,
 				2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */,
-				2F1871871F5EBF910061DD84 /* Media.xcassets in Resources */,
 				2F6330891F5D6D830086584B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48BC619DC78A038882941A32 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/TCPickerView/TCPickerView.bundle,
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4C439CCE6BF427BC221DE50 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TCPickerViewExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2AEE94ACE1AD6B65DD559F5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TCPickerView/TCPickerView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TCPickerView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F63307C1F5D6D830086584B /* Sources */ = {
@@ -163,8 +227,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F6330861F5D6D830086584B /* ViewController.swift in Sources */,
-				2F6330971F5D6DBA0086584B /* TCPickerView.swift in Sources */,
-				2F6330991F5D8C140086584B /* TCPickerTableViewCell.swift in Sources */,
 				2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +362,7 @@
 		};
 		2F6330931F5D6D830086584B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D80C568EFC6FDFA0382953FA /* Pods-TCPickerViewExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -316,6 +379,7 @@
 		};
 		2F6330941F5D6D830086584B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF49581795309993C432083C /* Pods-TCPickerViewExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -333,7 +397,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F63307B1F5D6D830086584B /* Build configuration list for PBXProject "TCPickerView" */ = {
+		2F63307B1F5D6D830086584B /* Build configuration list for PBXProject "TCPickerViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F6330901F5D6D830086584B /* Debug */,
@@ -342,7 +406,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2F6330921F5D6D830086584B /* Build configuration list for PBXNativeTarget "TCPickerView" */ = {
+		2F6330921F5D6D830086584B /* Build configuration list for PBXNativeTarget "TCPickerViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F6330931F5D6D830086584B /* Debug */,
