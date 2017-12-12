@@ -45,6 +45,8 @@ class ViewController: UIViewController {
         ]
         let values = cars.map { TCPickerView.Value(title: $0) }
         picker.values = values
+        picker.delegate = self
+        picker.selection = .single
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
@@ -54,6 +56,47 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+If you want to set pre-selected values: TCPickerView.Value(title: "Chevrolet Bolt EV", isChecked: true)`
+
+Picker supports `multiply`, `single` and `none` row selection. You can set desired behavior by setting `selection` property of `TCPickerView` to the appropriate value.
+
+#### Tracking user actions
+
+`TCPickerViewDelegate` allows you track what item was selected. Implament this method in your controller and assign `delegate` property 
+to this controller.
+
+```swift
+public protocol TCPickerViewDelegate: class {
+    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int)
+}
+```
+
+You can request new method if you need it. I'm open to discuss
+
+#### UI customization
+You can use next properties:
+
+```swift
+    //Change title
+    open var title: String
+    //Change Done button text
+    open var doneText: String
+    //Change Close button text
+    open var closeText: String
+    //Change text color of title, done and close buttons
+    open var textColor: UIColor
+    //Change topBar and Done button backgroundColor
+    open var mainColor: UIColor
+    //Change bacground color of Close button
+    open var closeButtonColor: UIColor
+    //Set close and done buttons font
+    open var buttonFont: UIFont?
+    //Set title font
+    open var titleFont: UIFont?
+```
+
+I will add new properties on request
 
 ## License
 
