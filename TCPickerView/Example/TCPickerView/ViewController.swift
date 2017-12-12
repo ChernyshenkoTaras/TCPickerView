@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TCPickerView
 
 class ViewController: UIViewController {
 

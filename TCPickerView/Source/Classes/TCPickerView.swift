@@ -27,7 +27,6 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     public typealias Completion = ([Int]) -> Void
-    
     fileprivate let tableViewCellIdentifier = "TableViewCell"
     fileprivate var titleLabel: UILabel?
     fileprivate var doneButton: UIButton?
