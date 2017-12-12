@@ -57,7 +57,7 @@ class ViewController: UIViewController {
 }
 ```
 
-If you want to set pre-selected values: TCPickerView.Value(title: "Chevrolet Bolt EV", isChecked: true)`
+If you want to set pre-selected values: `TCPickerView.Value(title: "Chevrolet Bolt EV", isChecked: true)`
 
 Picker supports `multiply`, `single` and `none` row selection. You can set desired behavior by setting `selection` property of `TCPickerView` to the appropriate value.
 
