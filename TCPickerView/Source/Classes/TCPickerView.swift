@@ -8,6 +8,10 @@
 
 import UIKit
 
+public protocol TCPickerViewDelegate: class {
+    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int)
+}
+
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     public enum Mode {
@@ -88,7 +92,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
             self.tableView?.reloadData()
         }
     }
-
+    open weak var delegate: TCPickerViewDelegate?
     open var completion: Completion?
     open var selection: Mode = .single
     
@@ -330,5 +334,6 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
                 values[indexPath.row].isChecked = !values[indexPath.row].isChecked
         }
         self.values = values
+        self.delegate?.pickerView(self, didSelectRowAtIndex: indexPath.row)
     }
 }
