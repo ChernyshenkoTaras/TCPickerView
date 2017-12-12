@@ -94,7 +94,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     open weak var delegate: TCPickerViewDelegate?
     open var completion: Completion?
-    open var selection: Mode = .single
+    open var selection: Mode = .multiply
     
     public init() {
         let screenWidth: CGFloat = UIScreen.main.bounds.width

@@ -9,7 +9,7 @@
 import UIKit
 import TCPickerView
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, TCPickerViewDelegate {
 
     @IBAction private func showButtonPressed(button: UIButton) {
         let picker = TCPickerView()
@@ -25,12 +25,20 @@ class ViewController: UIViewController {
         ]
         let values = cars.map { TCPickerView.Value(title: $0) }
         picker.values = values
+        picker.delegate = self
+        picker.selection = .single
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
             }
         }
         picker.show()
+    }
+    
+    //MARK: TCPickerViewDelegate methods
+    
+    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int) {
+        print("Uuser select row at index: \(index)")
     }
 }
 
