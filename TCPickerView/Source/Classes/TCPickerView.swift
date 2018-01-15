@@ -52,7 +52,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     open var closeText: String = "Close" {
         didSet {
-            self.doneButton?.setTitle(self.closeText, for: .normal)
+            self.closeButton?.setTitle(self.closeText, for: .normal)
         }
     }
     open var textColor: UIColor = UIColor.white {
