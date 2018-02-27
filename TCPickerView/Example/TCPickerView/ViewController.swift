@@ -26,6 +26,7 @@ class ViewController: UIViewController, TCPickerViewDelegate {
         let values = cars.map { TCPickerView.Value(title: $0) }
         picker.values = values
         picker.delegate = self
+        picker.itemsFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         picker.selection = .single
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {

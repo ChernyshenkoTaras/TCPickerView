@@ -13,21 +13,18 @@ class TCPickerTableViewCell: UITableViewCell {
     struct ViewModel {
         let title: String
         let isChecked: Bool
+        let titleFont: UIFont
     }
     
     var viewModel: ViewModel? {
         didSet {
-            self.titleLabel?.text = self.viewModel?.title ?? ""
-            self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
-                self.checkmark : UIImage()
+            self.updateUI()
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.titleLabel?.text = self.viewModel?.title ?? ""
-        self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
-            self.checkmark : UIImage()
+        self.updateUI()
     }
     
     private var checkmark: UIImage {
@@ -98,5 +95,12 @@ class TCPickerTableViewCell: UITableViewCell {
         self.addConstraint(NSLayoutConstraint(item: titleLabel,
             attribute: .trailing, relatedBy: .equal, toItem: imageView,
             attribute: .leading, multiplier: 1.0, constant: 8))
+    }
+    
+    private func updateUI() {
+        self.titleLabel?.text = self.viewModel?.title ?? ""
+        self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
+            self.checkmark : UIImage()
+        self.titleLabel?.font = self.viewModel?.titleFont ?? UIFont.systemFont(ofSize: 15)
     }
 }

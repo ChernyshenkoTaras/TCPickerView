@@ -86,13 +86,16 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
             self.titleLabel?.font = self.titleFont
         }
     }
+    open var itemsFont: UIFont = UIFont.systemFont(ofSize: 15.0)
     
     open var values: [Value] = [] {
         didSet {
             self.tableView?.reloadData()
         }
     }
+    
     open weak var delegate: TCPickerViewDelegate?
+    
     open var completion: Completion?
     open var selection: Mode = .multiply
     
@@ -267,6 +270,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
             usingSpringWithDamping: 0.7, initialSpringVelocity: 3.0,
             options: .allowAnimatedContent, animations: {
             self.containerView?.center = self.center
+            self.tableView?.reloadData()
         }) { (isFinished) in
             self.layoutIfNeeded()
         }
@@ -312,7 +316,8 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         let value = self.values[indexPath.row]
         cell.viewModel = TCPickerTableViewCell.ViewModel(
             title: value.title,
-            isChecked: value.isChecked
+            isChecked: value.isChecked,
+            titleFont: self.itemsFont
         )
         return cell
     }
