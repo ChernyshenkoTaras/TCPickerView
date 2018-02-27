@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         picker.values = values
         picker.delegate = self
         picker.selection = .single
+        picker.itemsFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
@@ -94,6 +95,8 @@ You can use next properties:
     open var buttonFont: UIFont?
     //Set title font
     open var titleFont: UIFont?
+    //Set items font
+    open var itemsFont: UIFont
 ```
 
 I will add new properties on request
