@@ -2,7 +2,7 @@
 Picker view popup with multiply rows selection written in Swift. 
 
 <a href="https://imgflip.com/gif/2c0eb5"><img src="https://i.imgflip.com/2c0eb5.gif" title="example"/></a>
-<img <a href="https://imgflip.com/gif/2c0esf"><img src="https://i.imgflip.com/2c0esf.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2c0esf"><img src="https://i.imgflip.com/2c0esf.gif" title="made at imgflip.com"/></a>
 
 ## Requirements
 
