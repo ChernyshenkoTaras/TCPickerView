@@ -9,9 +9,9 @@
 import UIKit
 import TCPickerView
 
-class ViewController: UIViewController, TCPickerViewDelegate {
+class ViewController: UIViewController, TCPickerViewOutput {
     @IBAction private func showButtonPressed(button: UIButton) {
-        let picker = TCPickerView()
+        var picker: TCPickerViewInput = TCPickerView()
         picker.title = "Cars"
         let cars = [
             "Chevrolet Bolt EV",
@@ -37,7 +37,7 @@ class ViewController: UIViewController, TCPickerViewDelegate {
     
     //MARK: TCPickerViewDelegate methods
     
-    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int) {
+    func pickerView(_ pickerView: TCPickerViewInput, didSelectRowAtIndex index: Int) {
         print("Uuser select row at index: \(index)")
     }
 }

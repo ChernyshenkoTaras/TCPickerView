@@ -8,19 +8,44 @@
 
 import UIKit
 
-public protocol TCPickerViewDelegate: class {
-    func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int)
-    func pickerView(_ pickerView: TCPickerView,
+public protocol TCPickerViewOutput: class {
+    func pickerView(_ pickerView: TCPickerViewInput, didSelectRowAtIndex index: Int)
+    func pickerView(_ pickerView: TCPickerViewInput,
         cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)?
 }
 
-public extension TCPickerViewDelegate {
-    func pickerView(_ pickerView: TCPickerView,
-                    cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)? {
+public extension TCPickerViewOutput {
+    func pickerView(_ pickerView: TCPickerViewInput,
+        cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)? {
         return nil
     }
 }
-open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
+
+public protocol TCPickerViewInput {
+    var values: [TCPickerView.Value] { set get }
+    var selection: TCPickerView.Mode { set get } // none/ single/ multiply
+    var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
+    var delegate: TCPickerViewOutput? { set get }
+    
+    var title: String { set get } // default is 'Select'
+    var doneText: String { set get } // default is 'Done'
+    var closeText: String { set get } // default is 'Close'
+    var textColor: UIColor { set get } // change text color of title, done and close buttons
+    var mainColor: UIColor { set get } // change topBar and Done button backgroundColor
+    var closeButtonColor: UIColor { set get } // change bacground color of Close button
+    var buttonFont: UIFont { set get } // set close and done buttons font
+    var titleFont: UIFont { set get } // default is 
+    var itemsFont: UIFont { set get } // default cells item title font
+    var rowHeight: CGFloat { set get } // default is 50
+    
+    init(pickerFrame: CGRect?) // desing your own picker size
+    func show()
+    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
+    func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
+    func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType
+}
+
+open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCPickerViewInput {
     
     public enum Mode {
         case none
@@ -48,66 +73,77 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     fileprivate var centerYConstraint: NSLayoutConstraint?
     fileprivate var tableView: UITableView?
     
-    open var title: String = "Select" {
+    public var title: String = "Select" {
         didSet {
             self.titleLabel?.text = self.title
         }
     }
-    open var doneText: String = "Done" {
+    public var doneText: String = "Done" {
         didSet {
             self.doneButton?.setTitle(self.doneText, for: .normal)
         }
     }
-    open var closeText: String = "Close" {
+    public var closeText: String = "Close" {
         didSet {
             self.closeButton?.setTitle(self.closeText, for: .normal)
         }
     }
-    open var textColor: UIColor = UIColor.white {
+    public var textColor: UIColor = UIColor.white {
         didSet {
             self.titleLabel?.textColor = self.textColor
             self.doneButton?.titleLabel?.textColor = self.textColor
             self.closeButton?.titleLabel?.textColor = self.textColor
         }
     }
-    open var mainColor: UIColor = UIColor(red: 75/255, green: 178/255,
+    public var mainColor: UIColor = UIColor(red: 75/255, green: 178/255,
         blue: 218/255, alpha: 1) {
         didSet {
             self.doneButton?.backgroundColor = self.mainColor
             self.titleLabel?.backgroundColor = self.mainColor
         }
     }
-    open var closeButtonColor: UIColor = UIColor(red: 198/255,
+    public var closeButtonColor: UIColor = UIColor(red: 198/255,
         green: 198/255, blue: 198/255, alpha: 1) {
         didSet {
             self.closeButton?.backgroundColor = self.closeButtonColor
         }
     }
-    open var buttonFont: UIFont? = UIFont(name: "Helvetica", size: 15.0) {
+    public var buttonFont: UIFont = UIFont(name: "Helvetica", size: 15.0)! {
         didSet {
             self.doneButton?.titleLabel?.font = self.buttonFont
             self.closeButton?.titleLabel?.font = self.buttonFont
         }
     }
-    open var titleFont: UIFont? = UIFont(name: "Helvetica-Bold", size: 15.0) {
+    public var titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 15.0)! {
         didSet {
             self.titleLabel?.font = self.titleFont
         }
     }
-    open var itemsFont: UIFont = UIFont.systemFont(ofSize: 15.0)
+    public var itemsFont: UIFont = UIFont.systemFont(ofSize: 15.0)
     
-    open var values: [Value] = [] {
+    public var values: [Value] = [] {
         didSet {
             self.tableView?.reloadData()
         }
     }
     
-    open weak var delegate: TCPickerViewDelegate?
+    public var rowHeight: CGFloat = 50 {
+        didSet {
+            self.tableView?.rowHeight = self.rowHeight
+        }
+    }
     
-    open var completion: Completion?
-    open var selection: Mode = .multiply
+    public weak var delegate: TCPickerViewOutput?
     
-    public init() {
+    public var completion: Completion?
+    public var selection: Mode = .multiply
+    
+
+    convenience init() {
+        self.init(pickerFrame: nil)
+    }
+    
+    public required init(pickerFrame: CGRect? = nil) {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         let screenHeight: CGFloat = UIScreen.main.bounds.height
         let frame: CGRect = CGRect(x: 0, y: 0, width: screenWidth,
@@ -117,13 +153,15 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
         let height: CGFloat = 400
         let x: CGFloat = 32
         let y: CGFloat = (screenHeight - height) / 2
-        let containerFrame: CGRect = CGRect(x: x, y: y, width: width, height: height)
-
+        var containerFrame: CGRect = CGRect(x: x, y: y, width: width, height: height)
+        if let pickerFrame = pickerFrame {
+            containerFrame = pickerFrame
+        }
         super.init(frame: frame)
         self.initialize(frame: containerFrame)
     }
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         self.initialize(frame: frame)
     }
@@ -187,6 +225,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     open func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType {
         return self.tableView!.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UITableViewCell & TCPickerCellType
     }
+    
     @objc private func done() {
         var indexes: [Int] = []
         for i in 0..<self.values.count {
@@ -355,11 +394,11 @@ extension TCPickerView {
         self.closeButtonColor = grayColor
         self.mainColor = UIColor(red: 75/255, green: 178/255,
                                  blue: 218/255, alpha: 1)
-        self.titleFont = UIFont(name: "Helvetica-Bold", size: 15.0)
-        self.buttonFont = UIFont(name: "Helvetica", size: 15.0)
+        self.titleFont = UIFont(name: "Helvetica-Bold", size: 15.0)!
+        self.buttonFont = UIFont(name: "Helvetica", size: 15.0)!
         self.tableView?.separatorInset = UIEdgeInsets(
             top: 0, left: 0, bottom: 0, right: 0)
-        self.tableView?.rowHeight = 50
+        self.tableView?.rowHeight = self.rowHeight
         self.tableView?.separatorStyle = .none
     }
 }

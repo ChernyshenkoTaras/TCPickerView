@@ -32,7 +32,7 @@ import TCPickerView
 class ViewController: UIViewController {
 
     @IBAction private func showButtonPressed(button: UIButton) {
-        let picker = TCPickerView()
+        var picker: TCPickerViewInput = TCPickerView()
         picker.title = "Cars"
         let cars = [
             "Chevrolet Bolt EV",
@@ -64,11 +64,11 @@ Picker supports `multiply`, `single` and `none` row selection. You can set desir
 
 #### Tracking user actions
 
-`TCPickerViewDelegate` allows you track what item was selected. Implament this method in your controller and assign `delegate` property 
+`TCPickerViewOutput` allows you track what item was selected. Implament this method in your controller and assign `delegate` property 
 to this controller.
 
 ```swift
-public protocol TCPickerViewDelegate: class {
+public protocol TCPickerViewOutput: class {
     func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int)
 }
 ```
@@ -76,30 +76,33 @@ public protocol TCPickerViewDelegate: class {
 You can request new method if you need it. I'm open to discuss
 
 #### UI customization
-You can use next properties:
+Use `TCPickerViewInput` protocol for change appearance :
 
 ```swift
-    //Change title
-    open var title: String
-    //Change Done button text
-    open var doneText: String
-    //Change Close button text
-    open var closeText: String
-    //Change text color of title, done and close buttons
-    open var textColor: UIColor
-    //Change topBar and Done button backgroundColor
-    open var mainColor: UIColor
-    //Change bacground color of Close button
-    open var closeButtonColor: UIColor
-    //Set close and done buttons font
-    open var buttonFont: UIFont?
-    //Set title font
-    open var titleFont: UIFont?
-    //Set items font
-    open var itemsFont: UIFont
+    var title: String { set get } // default is 'Select'
+    var doneText: String { set get } // default is 'Done'
+    var closeText: String { set get } // default is 'Close'
+    var textColor: UIColor { set get } // change text color of title, done and close buttons
+    var mainColor: UIColor { set get } // change topBar and Done button backgroundColor
+    var closeButtonColor: UIColor { set get } // change bacground color of Close button
+    var buttonFont: UIFont { set get } // set close and done buttons font
+    var titleFont: UIFont { set get } // default is 
+    var itemsFont: UIFont { set get } // default cells item title font
+    var rowHeight: CGFloat { set get } // default is 50
 ```
 
-I will add new properties on request
+#### Use your own cells
+
+* desing your cell in .xib or code
+* register cell in picker by using one of next methods
+```swift
+    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
+    func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
+```
+* implement `TCPickerViewOutput` protocol in your view controller
+* dequeue your cell in `func pickerView(_ pickerView: TCPickerViewInput,
+        cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)?` method by calling `func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType`
+* for more details have a look into `CustomCellViewController` in example project
 
 ## Contributing to this project
 
