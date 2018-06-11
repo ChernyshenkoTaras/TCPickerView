@@ -94,6 +94,7 @@ Use `TCPickerViewInput` protocol for change appearance :
 #### Use your own cells
 
 * desing your cell in .xib or code
+* conform your cell to `TCPickerCellType` protocol
 * register cell in picker by using one of next methods
 ```swift
     func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
