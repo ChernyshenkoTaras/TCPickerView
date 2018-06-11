@@ -13,6 +13,9 @@
 		2F6330891F5D6D830086584B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6330871F5D6D830086584B /* Main.storyboard */; };
 		2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308A1F5D6D830086584B /* Assets.xcassets */; };
 		2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */; };
+		63B4522420CE6DED00A5CB13 /* ExampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */; };
+		63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */; };
+		63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		2F63308D1F5D6D830086584B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F63308F1F5D6D830086584B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		545A352FB6EEF45689F1E140 /* Pods-TCPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.release.xcconfig"; sourceTree = "<group>"; };
+		63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleTableViewCell.xib; sourceTree = "<group>"; };
+		63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTableViewCell.swift; sourceTree = "<group>"; };
+		63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewController.swift; sourceTree = "<group>"; };
 		6BA6994F974C6B1A18114BAA /* Pods_TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78271278690115EFA7B6D75A /* Pods-TCPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,14 +81,25 @@
 		2F6330821F5D6D830086584B /* TCPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				63B4522720CE71C800A5CB13 /* View */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
+				63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */,
 				2F6330871F5D6D830086584B /* Main.storyboard */,
 				2F63308A1F5D6D830086584B /* Assets.xcassets */,
 				2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */,
 				2F63308F1F5D6D830086584B /* Info.plist */,
 			);
 			path = TCPickerView;
+			sourceTree = "<group>";
+		};
+		63B4522720CE71C800A5CB13 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */,
+				63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F65BC6F9159B8E9D49AA973E /* Frameworks */ = {
@@ -106,7 +123,6 @@
 				2F63307D1F5D6D830086584B /* Frameworks */,
 				2F63307E1F5D6D830086584B /* Resources */,
 				D2AEE94ACE1AD6B65DD559F5 /* [CP] Embed Pods Frameworks */,
-				48BC619DC78A038882941A32 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -156,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B4522420CE6DED00A5CB13 /* ExampleTableViewCell.xib in Resources */,
 				2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */,
 				2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */,
 				2F6330891F5D6D830086584B /* Main.storyboard in Resources */,
@@ -165,24 +182,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		48BC619DC78A038882941A32 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/TCPickerView/TCPickerView.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TCPickerViewExample/Pods-TCPickerViewExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C4C439CCE6BF427BC221DE50 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +227,8 @@
 			files = (
 				2F6330861F5D6D830086584B /* ViewController.swift in Sources */,
 				2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */,
+				63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */,
+				63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
