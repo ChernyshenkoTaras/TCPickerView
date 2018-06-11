@@ -8,15 +8,20 @@
 
 import UIKit
 
-class TCPickerTableViewCell: UITableViewCell {
-    
-    struct ViewModel {
-        let title: String
-        let isChecked: Bool
-        let titleFont: UIFont
-    }
-    
-    var viewModel: ViewModel? {
+public struct TCPickerModel {
+    public let title: String
+    public let isChecked: Bool
+    public let titleFont: UIFont
+}
+
+public protocol TCPickerCellType {
+    var viewModel: TCPickerModel? { set get }
+    func updateUI()
+}
+
+class TCPickerTableViewCell: UITableViewCell, TCPickerCellType {
+
+    var viewModel: TCPickerModel? {
         didSet {
             self.updateUI()
         }
@@ -38,69 +43,62 @@ class TCPickerTableViewCell: UITableViewCell {
         }
         return image
     }
-    private var titleLabel: UILabel?
-    private var checkmarkImageView: UIImageView?
+    private var titleLabel: UILabel = UILabel(frame: CGRect.zero)
+    private var checkmarkImageView: UIImageView = UIImageView(frame: CGRect.zero)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.initialize()
+        self.setupUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initialize()
+        self.setupUI()
     }
     
     fileprivate func initialize() {
-        self.titleLabel = UILabel(frame: CGRect.zero)
-        self.checkmarkImageView = UIImageView(frame: CGRect.zero)
-        self.checkmarkImageView?.contentMode = .scaleAspectFit
+        self.checkmarkImageView.contentMode = .scaleAspectFit
         self.setupUI()
     }
     
     fileprivate func setupUI() {
-        guard let titleLabel = self.titleLabel,
-            let imageView = self.checkmarkImageView else {
-                return
-        }
-        
         self.addSubview(titleLabel)
-        self.addSubview(imageView)
+        self.addSubview(self.checkmarkImageView)
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
+        self.checkmarkImageView.addConstraint(NSLayoutConstraint(item: self.checkmarkImageView,
             attribute: .height, relatedBy: .equal, toItem: nil,
             attribute: .height, multiplier: 1.0, constant: 24))
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
+        self.checkmarkImageView.addConstraint(NSLayoutConstraint(item: self.checkmarkImageView,
             attribute: .width, relatedBy: .equal, toItem: nil,
             attribute: .width, multiplier: 1.0, constant: 24))
         self.addConstraint(NSLayoutConstraint(item: self,
-            attribute: .trailing, relatedBy: .equal, toItem: imageView,
+            attribute: .trailing, relatedBy: .equal, toItem: self.checkmarkImageView,
             attribute: .trailing, multiplier: 1.0, constant: 8))
-        self.addConstraint(NSLayoutConstraint(item: imageView,
+        self.addConstraint(NSLayoutConstraint(item: self.checkmarkImageView,
             attribute: .centerY, relatedBy: .equal, toItem: self,
             attribute: .centerY, multiplier: 1.0, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: titleLabel,
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel,
             attribute: .leading, relatedBy: .equal, toItem: self,
             attribute: .leading, multiplier: 1.0, constant: 8))
-        self.addConstraint(NSLayoutConstraint(item: titleLabel,
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel,
             attribute: .top, relatedBy: .equal, toItem: self,
             attribute: .top, multiplier: 1.0, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: titleLabel,
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel,
             attribute: .bottom, relatedBy: .equal, toItem: self,
             attribute: .bottom, multiplier: 1.0, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: titleLabel,
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel,
             attribute: .trailing, relatedBy: .equal, toItem: imageView,
             attribute: .leading, multiplier: 1.0, constant: 8))
     }
     
-    private func updateUI() {
-        self.titleLabel?.text = self.viewModel?.title ?? ""
-        self.checkmarkImageView?.image = self.viewModel?.isChecked == true ?
+    func updateUI() {
+        self.titleLabel.text = self.viewModel?.title ?? ""
+        self.checkmarkImageView.image = self.viewModel?.isChecked == true ?
             self.checkmark : UIImage()
-        self.titleLabel?.font = self.viewModel?.titleFont ?? UIFont.systemFont(ofSize: 15)
+        self.titleLabel.font = self.viewModel?.titleFont ?? UIFont.systemFont(ofSize: 15)
     }
 }
