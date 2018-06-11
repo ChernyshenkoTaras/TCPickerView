@@ -15,6 +15,7 @@
 		2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */; };
 		63B4522420CE6DED00A5CB13 /* ExampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */; };
 		63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */; };
+		63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		545A352FB6EEF45689F1E140 /* Pods-TCPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.release.xcconfig"; sourceTree = "<group>"; };
 		63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleTableViewCell.xib; sourceTree = "<group>"; };
 		63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTableViewCell.swift; sourceTree = "<group>"; };
+		63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewController.swift; sourceTree = "<group>"; };
 		6BA6994F974C6B1A18114BAA /* Pods_TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78271278690115EFA7B6D75A /* Pods-TCPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				63B4522720CE71C800A5CB13 /* View */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
+				63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */,
 				2F6330871F5D6D830086584B /* Main.storyboard */,
 				2F63308A1F5D6D830086584B /* Assets.xcassets */,
 				2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 				2F6330861F5D6D830086584B /* ViewController.swift in Sources */,
 				2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */,
 				63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */,
+				63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

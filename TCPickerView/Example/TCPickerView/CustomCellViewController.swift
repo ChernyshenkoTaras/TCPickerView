@@ -1,15 +1,15 @@
 //
-//  ViewController.swift
-//  TCPickerView
+//  CustomCellViewController.swift
+//  TCPickerViewExample
 //
-//  Created by Taras Chernyshenko on 9/4/17.
-//  Copyright © 2017 Taras Chernyshenko. All rights reserved.
+//  Created by Taras Chernyshenko on 6/11/18.
+//  Copyright © 2018 Taras Chernyshenko. All rights reserved.
 //
 
 import UIKit
 import TCPickerView
 
-class ViewController: UIViewController, TCPickerViewDelegate {
+class CustomCellViewController: UIViewController, TCPickerViewDelegate {
     @IBAction private func showButtonPressed(button: UIButton) {
         let picker = TCPickerView()
         picker.title = "Cars"
@@ -26,7 +26,8 @@ class ViewController: UIViewController, TCPickerViewDelegate {
         picker.values = values
         picker.delegate = self
         picker.itemsFont = UIFont.systemFont(ofSize: 15, weight: .bold)
-        picker.selection = .single
+        picker.selection = .multiply
+        picker.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
@@ -40,5 +41,10 @@ class ViewController: UIViewController, TCPickerViewDelegate {
     func pickerView(_ pickerView: TCPickerView, didSelectRowAtIndex index: Int) {
         print("Uuser select row at index: \(index)")
     }
+    
+    func pickerView(_ pickerView: TCPickerView,
+        cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)? {
+        let cell = pickerView.dequeueReusableCell(withIdentifier: "ExampleTableViewCell", for: indexPath)
+        return cell
+    }
 }
-

@@ -14,6 +14,12 @@ public protocol TCPickerViewDelegate: class {
         cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)?
 }
 
+public extension TCPickerViewDelegate {
+    func pickerView(_ pickerView: TCPickerView,
+                    cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)? {
+        return nil
+    }
+}
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     public enum Mode {
