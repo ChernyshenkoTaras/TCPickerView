@@ -23,7 +23,7 @@ public extension TCPickerViewOutput {
 
 public protocol TCPickerViewInput {
     var values: [TCPickerView.Value] { set get }
-    var selection: TCPickerView.Mode { set get } // none/ single/ multiply
+    var selection: TCPickerView.Mode { set get } // none / single / multiply
     var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
     var delegate: TCPickerViewOutput? { set get }
     
@@ -38,7 +38,7 @@ public protocol TCPickerViewInput {
     var itemsFont: UIFont { set get } // default cells item title font
     var rowHeight: CGFloat { set get } // default is 50
     var cornerRadius: CGFloat { set get } //default is 15.0
-    var background: UIColor { set get }
+    var background: UIColor { set get } // default is .white
     
     init(size: CGSize?) // desing your own picker size
     func show()

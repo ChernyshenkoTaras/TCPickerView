@@ -89,6 +89,8 @@ Use `TCPickerViewInput` protocol for change appearance :
     var titleFont: UIFont { set get } // default is 
     var itemsFont: UIFont { set get } // default cells item title font
     var rowHeight: CGFloat { set get } // default is 50
+    var cornerRadius: CGFloat { set get } //default is 15.0
+    var background: UIColor { set get } // default is .white
 ```
 
 #### Use your own cells
