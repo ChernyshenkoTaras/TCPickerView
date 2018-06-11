@@ -11,7 +11,11 @@ import TCPickerView
 
 class CustomCellViewController: UIViewController, TCPickerViewOutput {
     @IBAction private func showButtonPressed(button: UIButton) {
-        var picker: TCPickerViewInput = TCPickerView()
+        let screenWidth: CGFloat = UIScreen.main.bounds.width
+        let screenHeight: CGFloat = UIScreen.main.bounds.height
+        let width: CGFloat = screenWidth - 64
+        let height: CGFloat = screenHeight - 160
+        var picker: TCPickerViewInput = TCPickerView(size: CGSize(width: width, height: height))
         picker.title = "Cars"
         let cars = [
             "Chevrolet Bolt EV",
@@ -25,7 +29,12 @@ class CustomCellViewController: UIViewController, TCPickerViewOutput {
         let values = cars.map { TCPickerView.Value(title: $0) }
         picker.values = values
         picker.delegate = self
+        picker.cornerRadius = 0.0
         picker.itemsFont = UIFont.systemFont(ofSize: 15, weight: .bold)
+        picker.mainColor = .black
+        picker.textColor = .white
+        picker.closeButtonColor = .black
+        picker.background = .black
         picker.selection = .multiply
         picker.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
         picker.completion = { (selectedIndexes) in

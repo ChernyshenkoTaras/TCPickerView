@@ -37,8 +37,10 @@ public protocol TCPickerViewInput {
     var titleFont: UIFont { set get } // default is 
     var itemsFont: UIFont { set get } // default cells item title font
     var rowHeight: CGFloat { set get } // default is 50
+    var cornerRadius: CGFloat { set get } //default is 15.0
+    var background: UIColor { set get }
     
-    init(pickerFrame: CGRect?) // desing your own picker size
+    init(size: CGSize?) // desing your own picker size
     func show()
     func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
     func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
@@ -133,6 +135,19 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         }
     }
     
+    public var cornerRadius: CGFloat = 15.0 {
+        didSet {
+            self.containerView?.layer.cornerRadius = self.cornerRadius
+        }
+    }
+    
+    public var background: UIColor = .white {
+        didSet {
+            self.tableView?.backgroundColor = self.backgroundColor
+            self.containerView?.backgroundColor = self.background
+        }
+    }
+    
     public weak var delegate: TCPickerViewOutput?
     
     public var completion: Completion?
@@ -140,10 +155,10 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     
 
     convenience init() {
-        self.init(pickerFrame: nil)
+        self.init(size: nil)
     }
     
-    public required init(pickerFrame: CGRect? = nil) {
+    public required init(size: CGSize? = nil) {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         let screenHeight: CGFloat = UIScreen.main.bounds.height
         let frame: CGRect = CGRect(x: 0, y: 0, width: screenWidth,
@@ -151,11 +166,9 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
 
         let width: CGFloat = screenWidth - 84
         let height: CGFloat = 400
-        let x: CGFloat = 32
-        let y: CGFloat = (screenHeight - height) / 2
-        var containerFrame: CGRect = CGRect(x: x, y: y, width: width, height: height)
-        if let pickerFrame = pickerFrame {
-            containerFrame = pickerFrame
+        var containerFrame: CGRect = CGRect(x: 0, y: 0, width: width, height: height)
+        if let size = size {
+            containerFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         }
         super.init(frame: frame)
         self.initialize(frame: containerFrame)
@@ -380,7 +393,7 @@ extension TCPickerView {
         self.containerView?.backgroundColor = UIColor.white
         self.containerView?.layer.borderColor = grayColor.cgColor
         self.containerView?.layer.borderWidth = 0.5
-        self.containerView?.layer.cornerRadius = 15.0
+        self.containerView?.layer.cornerRadius = self.cornerRadius
         self.containerView?.clipsToBounds = true
         self.titleLabel?.text = "Select"
         self.doneButton?.setTitle("Done", for: .normal)
@@ -400,5 +413,8 @@ extension TCPickerView {
             top: 0, left: 0, bottom: 0, right: 0)
         self.tableView?.rowHeight = self.rowHeight
         self.tableView?.separatorStyle = .none
+        self.tableView?.tintColor = .clear
+        self.tableView?.backgroundColor = self.background
+        self.containerView?.backgroundColor = self.background
     }
 }

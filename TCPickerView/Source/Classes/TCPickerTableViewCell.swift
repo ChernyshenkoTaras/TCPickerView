@@ -93,6 +93,7 @@ class TCPickerTableViewCell: UITableViewCell, TCPickerCellType {
         self.addConstraint(NSLayoutConstraint(item: self.titleLabel,
             attribute: .trailing, relatedBy: .equal, toItem: imageView,
             attribute: .leading, multiplier: 1.0, constant: 8))
+        self.selectionStyle = .none
     }
     
     func updateUI() {

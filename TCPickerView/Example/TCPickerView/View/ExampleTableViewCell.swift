@@ -27,6 +27,10 @@ class ExampleTableViewCell: UITableViewCell, TCPickerCellType {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.checkmarkView?.layer.cornerRadius = 8.0
+        self.backgroundColor = .black
+        self.titleLabel?.textColor = .white
+        self.tintColor = .clear
+        self.selectionStyle = .none
     }
     
     func updateUI() {
@@ -34,6 +38,6 @@ class ExampleTableViewCell: UITableViewCell, TCPickerCellType {
             return
         }
         self.titleLabel?.text = viewModel.title
-        self.checkmarkView?.backgroundColor = viewModel.isChecked ? .red : .clear
+        self.checkmarkView?.backgroundColor = viewModel.isChecked ? .white : .clear
     }
 }
