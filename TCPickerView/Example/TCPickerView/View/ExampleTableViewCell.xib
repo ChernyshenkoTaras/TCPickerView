@@ -19,17 +19,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzW-ef-hrg">
-                        <rect key="frame" x="16" y="0.0" width="42" height="56.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="16" y="0.0" width="35" height="56.5"/>
+                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kes-Jx-jIC">
-                        <rect key="frame" x="350" y="20" width="16" height="16"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="342" y="16" width="24" height="24"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark_icon" translatesAutoresizingMaskIntoConstraints="NO" id="UAc-f5-cVy">
+                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="0Nr-F4-us1"/>
-                            <constraint firstAttribute="width" constant="16" id="h3r-qz-kXr"/>
+                            <constraint firstAttribute="height" constant="24" id="0Nr-F4-us1"/>
+                            <constraint firstAttribute="trailing" secondItem="UAc-f5-cVy" secondAttribute="trailing" id="8eP-by-JbY"/>
+                            <constraint firstItem="UAc-f5-cVy" firstAttribute="leading" secondItem="kes-Jx-jIC" secondAttribute="leading" id="dhG-uf-uDV"/>
+                            <constraint firstAttribute="width" constant="24" id="h3r-qz-kXr"/>
+                            <constraint firstItem="UAc-f5-cVy" firstAttribute="top" secondItem="kes-Jx-jIC" secondAttribute="top" id="iZv-cz-p0T"/>
+                            <constraint firstAttribute="bottom" secondItem="UAc-f5-cVy" secondAttribute="bottom" id="trV-zP-9Mk"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -42,10 +51,13 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="checkmarkView" destination="kes-Jx-jIC" id="Ag4-cU-BTM"/>
+                <outlet property="checkmarkImageView" destination="UAc-f5-cVy" id="cuo-Bd-kUh"/>
                 <outlet property="titleLabel" destination="HzW-ef-hrg" id="88x-vj-8vh"/>
             </connections>
             <point key="canvasLocation" x="54" y="62.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkmark_icon" width="100" height="100"/>
+    </resources>
 </document>

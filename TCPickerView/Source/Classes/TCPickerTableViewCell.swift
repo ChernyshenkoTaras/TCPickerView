@@ -11,7 +11,6 @@ import UIKit
 public struct TCPickerModel {
     public let title: String
     public let isChecked: Bool
-    public let titleFont: UIFont
 }
 
 public protocol TCPickerCellType {
@@ -100,6 +99,5 @@ class TCPickerTableViewCell: UITableViewCell, TCPickerCellType {
         self.titleLabel.text = self.viewModel?.title ?? ""
         self.checkmarkImageView.image = self.viewModel?.isChecked == true ?
             self.checkmark : UIImage()
-        self.titleLabel.font = self.viewModel?.titleFont ?? UIFont.systemFont(ofSize: 15)
     }
 }

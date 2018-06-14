@@ -13,9 +13,10 @@
 		2F6330891F5D6D830086584B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F6330871F5D6D830086584B /* Main.storyboard */; };
 		2F63308B1F5D6D830086584B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308A1F5D6D830086584B /* Assets.xcassets */; };
 		2F63308E1F5D6D830086584B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */; };
+		635BFD2A20D154F30075967A /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635BFD2920D154F30075967A /* LightViewController.swift */; };
 		63B4522420CE6DED00A5CB13 /* ExampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */; };
 		63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */; };
-		63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */; };
+		63B4522920CE74A600A5CB13 /* DarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4522820CE74A600A5CB13 /* DarkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +28,10 @@
 		2F63308D1F5D6D830086584B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F63308F1F5D6D830086584B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		545A352FB6EEF45689F1E140 /* Pods-TCPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.release.xcconfig"; sourceTree = "<group>"; };
+		635BFD2920D154F30075967A /* LightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
 		63B4522320CE6DED00A5CB13 /* ExampleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExampleTableViewCell.xib; sourceTree = "<group>"; };
 		63B4522520CE6E5800A5CB13 /* ExampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTableViewCell.swift; sourceTree = "<group>"; };
-		63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewController.swift; sourceTree = "<group>"; };
+		63B4522820CE74A600A5CB13 /* DarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkViewController.swift; sourceTree = "<group>"; };
 		6BA6994F974C6B1A18114BAA /* Pods_TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78271278690115EFA7B6D75A /* Pods-TCPickerView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TCPickerView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TCPickerView/Pods-TCPickerView.debug.xcconfig"; sourceTree = "<group>"; };
 		B6D3D5255C2AAE62C7622406 /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +86,8 @@
 				63B4522720CE71C800A5CB13 /* View */,
 				2F6330831F5D6D830086584B /* AppDelegate.swift */,
 				2F6330851F5D6D830086584B /* ViewController.swift */,
-				63B4522820CE74A600A5CB13 /* CustomCellViewController.swift */,
+				63B4522820CE74A600A5CB13 /* DarkViewController.swift */,
+				635BFD2920D154F30075967A /* LightViewController.swift */,
 				2F6330871F5D6D830086584B /* Main.storyboard */,
 				2F63308A1F5D6D830086584B /* Assets.xcassets */,
 				2F63308C1F5D6D830086584B /* LaunchScreen.storyboard */,
@@ -140,7 +143,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Taras Chernyshenko";
 				TargetAttributes = {
 					2F63307F1F5D6D830086584B = {
@@ -228,7 +231,8 @@
 				2F6330861F5D6D830086584B /* ViewController.swift in Sources */,
 				2F6330841F5D6D830086584B /* AppDelegate.swift in Sources */,
 				63B4522620CE6E5800A5CB13 /* ExampleTableViewCell.swift in Sources */,
-				63B4522920CE74A600A5CB13 /* CustomCellViewController.swift in Sources */,
+				63B4522920CE74A600A5CB13 /* DarkViewController.swift in Sources */,
+				635BFD2A20D154F30075967A /* LightViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +272,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -275,6 +280,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -325,6 +331,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -332,6 +339,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
