@@ -1,8 +1,9 @@
 # TCPickerView
 Picker view popup with multiply rows selection written in Swift. 
 
-<a href="https://imgflip.com/gif/2c0eb5"><img src="https://i.imgflip.com/2c0eb5.gif" title="example"/></a>
-<a href="https://imgflip.com/gif/2c0esf"><img src="https://i.imgflip.com/2c0esf.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2cl3vt"><img src="https://i.imgflip.com/2cl3vt.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2cl3l3"><img src="https://i.imgflip.com/2cl3l3.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2cl3ix"><img src="https://i.imgflip.com/2cl3ix.gif" title="made at imgflip.com"/></a>
 
 ## Requirements
 
@@ -48,7 +49,6 @@ class ViewController: UIViewController {
         picker.values = values
         picker.delegate = self
         picker.selection = .single
-        picker.itemsFont = UIFont.systemFont(ofSize: 15, weight: .bold)
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
@@ -77,23 +77,35 @@ public protocol TCPickerViewOutput: class {
 You can request new method if you need it. I'm open to discuss
 
 #### UI customization
-Use `TCPickerViewInput` protocol for change appearance :
+Create a class that conform to `TCPickerViewThemeType` protocol and adjust UI layout or use one of the existing themes:
+* TCPickerViewDefaultTheme
+* TCPickerViewLightTheme
+* TCPickerViewDarkTheme
 
-```swift
-    var title: String { set get } // default is 'Select'
-    var doneText: String { set get } // default is 'Done'
-    var closeText: String { set get } // default is 'Close'
-    var textColor: UIColor { set get } // change text color of title, done and close buttons
-    var mainColor: UIColor { set get } // change topBar and Done button backgroundColor
-    var closeButtonColor: UIColor { set get } // change bacground color of Close button
-    var buttonFont: UIFont { set get } // set close and done buttons font
-    var titleFont: UIFont { set get } // default is 
-    var itemsFont: UIFont { set get } // default cells item title font
-    var rowHeight: CGFloat { set get } // default is 50
-    var cornerRadius: CGFloat { set get } //default is 15.0
-    var background: UIColor { set get } // default is .white
+Use them as reference for creation you own awesome design.
+
+You can change next properties:
+
 ```
+var doneText: String { get }
+var closeText: String { get }
 
+var backgroundColor: UIColor { get }
+var titleColor: UIColor { get }
+var doneTextColor: UIColor { get }
+var closeTextColor: UIColor { get }
+var headerBackgroundColor: UIColor { get }
+var doneBackgroundColor: UIColor { get }
+var closeBackgroundColor: UIColor { get }
+var separatorColor: UIColor { get }
+
+var buttonsFont: UIFont { get }
+var titleFont: UIFont { get }
+
+var rowHeight: CGFloat { get }
+var headerHeight: CGFloat { get }
+var cornerRadius: CGFloat { get }
+```
 #### Use your own cells
 
 * desing your cell in .xib or code
@@ -106,7 +118,7 @@ Use `TCPickerViewInput` protocol for change appearance :
 * implement `TCPickerViewOutput` protocol in your view controller
 * dequeue your cell in `func pickerView(_ pickerView: TCPickerViewInput,
         cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)?` method by calling `func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType`
-* for more details have a look into `CustomCellViewController` in example project
+* for more details have a look into `LightViewController` file in a example project.
 
 ## Contributing to this project
 
