@@ -16,8 +16,8 @@ class ExampleTableViewCell: UITableViewCell, TCPickerCellType {
         }
     }
     
-    @IBOutlet private weak var titleLabel: UILabel?
-    @IBOutlet private weak var checkmarkView: UIView?
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var checkmarkImageView: UIImageView?
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -26,9 +26,6 @@ class ExampleTableViewCell: UITableViewCell, TCPickerCellType {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.checkmarkView?.layer.cornerRadius = 8.0
-        self.backgroundColor = .black
-        self.titleLabel?.textColor = .white
         self.tintColor = .clear
         self.selectionStyle = .none
     }
@@ -38,6 +35,6 @@ class ExampleTableViewCell: UITableViewCell, TCPickerCellType {
             return
         }
         self.titleLabel?.text = viewModel.title
-        self.checkmarkView?.backgroundColor = viewModel.isChecked ? .white : .clear
+        self.checkmarkImageView?.isHidden = !viewModel.isChecked
     }
 }

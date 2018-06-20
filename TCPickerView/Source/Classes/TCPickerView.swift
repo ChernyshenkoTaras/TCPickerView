@@ -27,18 +27,8 @@ public protocol TCPickerViewInput {
     var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
     var delegate: TCPickerViewOutput? { set get }
     
-    var title: String { set get } // default is 'Select'
-    var doneText: String { set get } // default is 'Done'
-    var closeText: String { set get } // default is 'Close'
-    var textColor: UIColor { set get } // change text color of title, done and close buttons
-    var mainColor: UIColor { set get } // change topBar and Done button backgroundColor
-    var closeButtonColor: UIColor { set get } // change bacground color of Close button
-    var buttonFont: UIFont { set get } // set close and done buttons font
-    var titleFont: UIFont { set get } // default is 
-    var itemsFont: UIFont { set get } // default cells item title font
-    var rowHeight: CGFloat { set get } // default is 50
-    var cornerRadius: CGFloat { set get } //default is 15.0
-    var background: UIColor { set get } // default is .white
+    var title: String { set get }
+    var theme: TCPickerViewThemeType { set get }
     
     init(size: CGSize?) // desing your own picker size
     func show()
@@ -74,77 +64,18 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     fileprivate var centerXConstraint: NSLayoutConstraint?
     fileprivate var centerYConstraint: NSLayoutConstraint?
     fileprivate var tableView: UITableView?
-    
-    public var title: String = "Select" {
-        didSet {
-            self.titleLabel?.text = self.title
-        }
-    }
-    public var doneText: String = "Done" {
-        didSet {
-            self.doneButton?.setTitle(self.doneText, for: .normal)
-        }
-    }
-    public var closeText: String = "Close" {
-        didSet {
-            self.closeButton?.setTitle(self.closeText, for: .normal)
-        }
-    }
-    public var textColor: UIColor = UIColor.white {
-        didSet {
-            self.titleLabel?.textColor = self.textColor
-            self.doneButton?.titleLabel?.textColor = self.textColor
-            self.closeButton?.titleLabel?.textColor = self.textColor
-        }
-    }
-    public var mainColor: UIColor = UIColor(red: 75/255, green: 178/255,
-        blue: 218/255, alpha: 1) {
-        didSet {
-            self.doneButton?.backgroundColor = self.mainColor
-            self.titleLabel?.backgroundColor = self.mainColor
-        }
-    }
-    public var closeButtonColor: UIColor = UIColor(red: 198/255,
-        green: 198/255, blue: 198/255, alpha: 1) {
-        didSet {
-            self.closeButton?.backgroundColor = self.closeButtonColor
-        }
-    }
-    public var buttonFont: UIFont = UIFont(name: "Helvetica", size: 15.0)! {
-        didSet {
-            self.doneButton?.titleLabel?.font = self.buttonFont
-            self.closeButton?.titleLabel?.font = self.buttonFont
-        }
-    }
-    public var titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 15.0)! {
-        didSet {
-            self.titleLabel?.font = self.titleFont
-        }
-    }
-    public var itemsFont: UIFont = UIFont.systemFont(ofSize: 15.0)
+    fileprivate var headerSeparator: UIView?
+    fileprivate var headerHC: NSLayoutConstraint?
     
     public var values: [Value] = [] {
         didSet {
             self.tableView?.reloadData()
         }
     }
-    
-    public var rowHeight: CGFloat = 50 {
+
+    public var title: String = "Select" {
         didSet {
-            self.tableView?.rowHeight = self.rowHeight
-        }
-    }
-    
-    public var cornerRadius: CGFloat = 15.0 {
-        didSet {
-            self.containerView?.layer.cornerRadius = self.cornerRadius
-        }
-    }
-    
-    public var background: UIColor = .white {
-        didSet {
-            self.tableView?.backgroundColor = self.backgroundColor
-            self.containerView?.backgroundColor = self.background
+            self.titleLabel?.text = self.title
         }
     }
     
@@ -152,7 +83,11 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     
     public var completion: Completion?
     public var selection: Mode = .multiply
-    
+    public var theme: TCPickerViewThemeType = TCPickerViewDefaultTheme() {
+        didSet {
+            self.updateUI()
+        }
+    }
 
     convenience init() {
         self.init(size: nil)
@@ -190,6 +125,8 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         self.closeButton = UIButton(frame: CGRect.zero)
         self.titleLabel = UILabel(frame: CGRect.zero)
         self.tableView = UITableView(frame: CGRect.zero)
+        self.headerSeparator = UIView(frame: CGRect.zero)
+        
         self.tableView?.register(TCPickerTableViewCell.self,
             forCellReuseIdentifier: self.tableViewCellIdentifier)
         self.tableView?.tableFooterView = UIView()
@@ -278,8 +215,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         }
         cell.viewModel = TCPickerModel(
             title: value.title,
-            isChecked: value.isChecked,
-            titleFont: self.itemsFont
+            isChecked: value.isChecked
         )
         return cell
     }
@@ -313,7 +249,8 @@ extension TCPickerView {
             let doneButton = self.doneButton,
             let closeButton = self.closeButton,
             let titleLabel = self.titleLabel,
-            let tableView = self.tableView else {
+            let tableView = self.tableView,
+            let headerSeparator = self.headerSeparator else {
                 return
         }
         
@@ -322,11 +259,13 @@ extension TCPickerView {
         containerView.addSubview(closeButton)
         containerView.addSubview(titleLabel)
         containerView.addSubview(tableView)
+        containerView.addSubview(headerSeparator)
         
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        headerSeparator.translatesAutoresizingMaskIntoConstraints = false
         
         self.containerView?.center = CGPoint(x: self.center.x,
             y: self.center.y + self.frame.size.height)
@@ -341,9 +280,23 @@ extension TCPickerView {
         containerView.addConstraint(NSLayoutConstraint(item: titleLabel,
             attribute: .trailing, relatedBy: .equal, toItem: containerView,
             attribute: .trailing, multiplier: 1.0, constant: 0))
-        titleLabel.addConstraint(NSLayoutConstraint(item: titleLabel,
+        self.headerHC = NSLayoutConstraint(item: titleLabel,
+                           attribute: .height, relatedBy: .equal, toItem: nil,
+                           attribute: .height, multiplier: 1.0, constant: 70)
+        titleLabel.addConstraint(self.headerHC!)
+        
+        headerSeparator.addConstraint(NSLayoutConstraint(item: headerSeparator,
             attribute: .height, relatedBy: .equal, toItem: nil,
-            attribute: .height, multiplier: 1.0, constant: 50))
+            attribute: .height, multiplier: 1.0, constant: 0.5))
+        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
+            attribute: .top, relatedBy: .equal, toItem: titleLabel,
+            attribute: .bottom, multiplier: 1.0, constant: 0))
+        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
+             attribute: .leading, relatedBy: .equal, toItem: titleLabel,
+             attribute: .leading, multiplier: 1.0, constant: 0))
+        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
+            attribute: .trailing, relatedBy: .equal, toItem: titleLabel,
+            attribute: .trailing, multiplier: 1.0, constant: 0))
         
         //buttons
         containerView.addConstraint(NSLayoutConstraint(item: containerView,
@@ -379,7 +332,7 @@ extension TCPickerView {
         containerView.addConstraint(NSLayoutConstraint(item: containerView,
             attribute: .leading, relatedBy: .equal, toItem: tableView,
             attribute: .leading, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: titleLabel,
+        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
             attribute: .bottom, relatedBy: .equal, toItem: tableView,
             attribute: .top, multiplier: 1.0, constant: 0))
         containerView.addConstraint(NSLayoutConstraint(item: closeButton,
@@ -388,12 +341,8 @@ extension TCPickerView {
     }
     
     fileprivate func updateUI() {
-        let grayColor = UIColor(red: 198/255,
-            green: 198/255, blue: 198/255, alpha: 1)
         self.containerView?.backgroundColor = UIColor.white
-        self.containerView?.layer.borderColor = grayColor.cgColor
-        self.containerView?.layer.borderWidth = 0.5
-        self.containerView?.layer.cornerRadius = self.cornerRadius
+        self.containerView?.layer.cornerRadius = self.theme.cornerRadius
         self.containerView?.clipsToBounds = true
         self.titleLabel?.text = "Select"
         self.doneButton?.setTitle("Done", for: .normal)
@@ -403,18 +352,30 @@ extension TCPickerView {
         self.closeButton?.titleLabel?.textAlignment = .center
         self.titleLabel?.textAlignment = .center
         
-        self.textColor = UIColor.white
-        self.closeButtonColor = grayColor
-        self.mainColor = UIColor(red: 75/255, green: 178/255,
-                                 blue: 218/255, alpha: 1)
-        self.titleFont = UIFont(name: "Helvetica-Bold", size: 15.0)!
-        self.buttonFont = UIFont(name: "Helvetica", size: 15.0)!
+        self.titleLabel?.textColor = self.theme.titleColor
+        self.doneButton?.setTitleColor(self.theme.doneTextColor, for: .normal)
+        self.closeButton?.setTitleColor(self.theme.closeTextColor, for: .normal)
+        
+        self.titleLabel?.text = self.title
+        self.doneButton?.setTitle(self.theme.doneText, for: .normal)
+        self.closeButton?.setTitle(self.theme.closeText, for: .normal)
+        
+        self.titleLabel?.backgroundColor = self.theme.headerBackgroundColor
+        self.doneButton?.backgroundColor = self.theme.doneBackgroundColor
+        self.closeButton?.backgroundColor = self.theme.closeBackgroundColor
+        self.headerSeparator?.backgroundColor = self.theme.separatorColor
+        
+        self.titleLabel?.font = self.theme.titleFont
+        self.doneButton?.titleLabel?.font = self.theme.buttonsFont
+        self.closeButton?.titleLabel?.font = self.theme.buttonsFont
+        
         self.tableView?.separatorInset = UIEdgeInsets(
             top: 0, left: 0, bottom: 0, right: 0)
-        self.tableView?.rowHeight = self.rowHeight
+        self.tableView?.rowHeight = self.theme.rowHeight
         self.tableView?.separatorStyle = .none
         self.tableView?.tintColor = .clear
-        self.tableView?.backgroundColor = self.background
-        self.containerView?.backgroundColor = self.background
+        self.tableView?.backgroundColor = self.theme.backgroundColor
+        self.containerView?.backgroundColor = self.theme.backgroundColor
+        self.headerHC?.constant = self.theme.headerHeight
     }
 }
