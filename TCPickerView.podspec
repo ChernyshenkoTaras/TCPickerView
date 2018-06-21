@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'TCPickerView'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Picker view popup with multiply rows selection written in Swift'
 
   s.description      = <<-DESC
