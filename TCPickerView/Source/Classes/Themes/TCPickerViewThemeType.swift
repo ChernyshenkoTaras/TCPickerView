@@ -5,7 +5,7 @@
 //  Created by Taras Chernyshenko on 6/13/18.
 //
 
-import Foundation
+import UIKit
 
 public protocol TCPickerViewThemeType {
     var doneText: String { get }
