@@ -34,7 +34,7 @@ class LightViewController: UIViewController, TCPickerViewOutput {
         picker.theme = self.theme
         picker.delegate = self
         picker.selection = .multiply
-        picker.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
+        picker.registerCellWithNib(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {
                 print(values[i].title)
@@ -54,7 +54,7 @@ class LightViewController: UIViewController, TCPickerViewOutput {
     
     func pickerView(_ pickerView: TCPickerViewInput,
                     cellForRowAt indexPath: IndexPath) -> (UITableViewCell & TCPickerCellType)? {
-        let cell = pickerView.dequeue(withIdentifier: "ExampleTableViewCell", for: indexPath) as! ExampleTableViewCell
+        let cell = pickerView.loadCell(withIdentifier: "ExampleTableViewCell", for: indexPath) as! ExampleTableViewCell
         cell.titleLabel?.textColor = self.theme.textColor
         cell.checkmarkImageView?.image = UIImage(named: "checkmark_icon")?.withRenderingMode(.alwaysTemplate)
         cell.checkmarkImageView?.tintColor = self.theme.textColor

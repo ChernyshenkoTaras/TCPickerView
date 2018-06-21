@@ -32,9 +32,9 @@ public protocol TCPickerViewInput {
     
     init(size: CGSize?) // desing your own picker size
     func show()
-    func register(_ nib: UINib?, forCellReuseIdentifier identifier: String)
-    func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
-    func dequeue(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType
+    func registerCellWithNib(_ nib: UINib?, forCellReuseIdentifier identifier: String)
+    func registerCellWithNib(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String)
+    func loadCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType
 }
 
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCPickerViewInput {
@@ -164,15 +164,15 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         }
     }
     
-    @nonobjc open func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
+    open func registerCellWithNib(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
         self.tableView?.register(nib, forCellReuseIdentifier: identifier)
     }
     
-    @nonobjc open func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String) {
+    open func registerCellWithNib(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String) {
         self.tableView?.register(cellClass, forCellReuseIdentifier: identifier)
     }
     
-    open func dequeue(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType {
+    open func loadCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType {
         return self.tableView!.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UITableViewCell & TCPickerCellType
     }
     
