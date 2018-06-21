@@ -53,11 +53,11 @@ public final class TCPickerViewDarkTheme: TCPickerViewThemeType {
     }
     
     public var buttonsFont: UIFont {
-        return UIFont.systemFont(ofSize: 15, weight: .medium)
+        return UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
     }
     
     public var titleFont: UIFont{
-        return UIFont.systemFont(ofSize: 20, weight: .bold)
+        return UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
     }
     
     public var rowHeight: CGFloat {
