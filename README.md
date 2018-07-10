@@ -7,14 +7,14 @@ Picker view popup with multiply rows selection written in Swift.
 
 ## Requirements
 
-TimeIntervalPicker works on iOS 9 and higher. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
+TCPickerView works on iOS 9 and higher. It depends on the following Apple frameworks, which should already be included with most Xcode templates:
 
 * Foundation
 * UIKit
 
 ## Installation
 #### CocoaPods
-You can use [CocoaPods](http://cocoapods.org/) to install `TimeIntervalPicker` by adding it to your `Podfile`:
+You can use [CocoaPods](http://cocoapods.org/) to install `TCPickerView` by adding it to your `Podfile`:
 
 ```ruby
 platform :ios, '9.0'
@@ -86,7 +86,7 @@ Use them as reference for creation you own awesome design.
 
 You can change next properties:
 
-```
+```swift
 var doneText: String { get }
 var closeText: String { get }
 
