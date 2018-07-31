@@ -1,10 +1,6 @@
 <p align="center"><img src="logo/logotype-a.png"></p>
 
-Picker view popup with multiply rows selection written in Swift. 
-
-<a href="https://imgflip.com/gif/2cl3vt"><img src="https://i.imgflip.com/2cl3vt.gif" title="made at imgflip.com"/></a>
-<a href="https://imgflip.com/gif/2cl3l3"><img src="https://i.imgflip.com/2cl3l3.gif" title="made at imgflip.com"/></a>
-<a href="https://imgflip.com/gif/2cl3ix"><img src="https://i.imgflip.com/2cl3ix.gif" title="made at imgflip.com"/></a>
+Picker view popup with multiply/single rows selection written in Swift with colors/sizes/texts/and fonts customization
 
 ## Requirements
 
@@ -59,6 +55,10 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+<a href="https://imgflip.com/gif/2cl3vt"><img src="https://i.imgflip.com/2cl3vt.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2cl3l3"><img src="https://i.imgflip.com/2cl3l3.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2cl3ix"><img src="https://i.imgflip.com/2cl3ix.gif" title="made at imgflip.com"/></a>
 
 If you want to set pre-selected values: `TCPickerView.Value(title: "Chevrolet Bolt EV", isChecked: true)`
 
