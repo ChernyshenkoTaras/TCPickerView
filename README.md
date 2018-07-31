@@ -1,4 +1,5 @@
-# TCPickerView
+<p align="center"><img src="logo/logotype-a.png"></p>
+
 Picker view popup with multiply rows selection written in Swift. 
 
 <a href="https://imgflip.com/gif/2cl3vt"><img src="https://i.imgflip.com/2cl3vt.gif" title="made at imgflip.com"/></a>
