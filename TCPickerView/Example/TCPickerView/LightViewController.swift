@@ -40,6 +40,9 @@ class LightViewController: UIViewController, TCPickerViewOutput {
                 print(values[i].title)
             }
         }
+        picker.closeAction = {
+            print("Handle close action here")
+        }
         picker.show()
     }
     

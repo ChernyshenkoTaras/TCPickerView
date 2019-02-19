@@ -25,6 +25,7 @@ public protocol TCPickerViewInput {
     var values: [TCPickerView.Value] { set get }
     var selection: TCPickerView.Mode { set get } // none / single / multiply
     var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
+    var closeAction: TCPickerView.CloseAction? { set get }
     var delegate: TCPickerViewOutput? { set get }
     
     var title: String { set get }
@@ -55,6 +56,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     }
     
     public typealias Completion = ([Int]) -> Void
+    public typealias CloseAction = () -> ()
     fileprivate let tableViewCellIdentifier = "TableViewCell"
     fileprivate var titleLabel: UILabel?
     fileprivate var doneButton: UIButton?
@@ -79,7 +81,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     }
     
     public weak var delegate: TCPickerViewOutput?
-    
+    public var closeAction: TCPickerView.CloseAction?
     public var completion: Completion?
     public var selection: Mode = .multiply
     public var theme: TCPickerViewThemeType = TCPickerViewDefaultTheme() {
@@ -183,20 +185,23 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
             }
         }
         self.completion?(indexes)
-        self.close()
+        self.hide()
     }
     
     @objc private func close() {
+        self.hide()
+        self.closeAction?()
+    }
+    
+    private func hide() {
         UIView.animate(withDuration: 0.7, delay: 0.0,
             usingSpringWithDamping: 1, initialSpringVelocity: 1.0,
             options: .allowAnimatedContent, animations: {
-            self.containerView?.center = CGPoint(x: self.center.x,
-            y: self.center.y + self.frame.size.height)
+            self.containerView?.center = CGPoint(x: self.center.x, y: self.center.y + self.frame.size.height)
         }) { (isFinished) in
             self.removeFromSuperview()
         }
     }
-    
     //MARK: UITableViewDataSource methods
     
     public func tableView(_ tableView: UITableView,
