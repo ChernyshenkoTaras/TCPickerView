@@ -45,7 +45,7 @@ class TCPickerTableViewCell: UITableViewCell, TCPickerCellType {
     private var titleLabel: UILabel = UILabel(frame: CGRect.zero)
     private var checkmarkImageView: UIImageView = UIImageView(frame: CGRect.zero)
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupUI()
     }

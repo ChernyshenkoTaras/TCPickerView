@@ -153,7 +153,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         }
         
         window?.addSubview(self)
-        window?.bringSubview(toFront: self)
+        window?.bringSubviewToFront(self)
         window?.endEditing(true)
         UIView.animate(withDuration: 0.3, delay: 0.0,
             usingSpringWithDamping: 0.7, initialSpringVelocity: 3.0,
