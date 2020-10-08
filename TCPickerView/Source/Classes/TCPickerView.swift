@@ -27,6 +27,7 @@ public protocol TCPickerViewInput {
     var isSearchEnabled: Bool { set get }
     var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
     var closeAction: TCPickerView.CloseAction? { set get }
+    var searchResult: TCPickerView.SearchResult? { set get }
     var delegate: TCPickerViewOutput? { set get }
     
     var title: String { set get }
@@ -47,6 +48,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
 
     public typealias Completion = ([Int]) -> Void
     public typealias CloseAction = () -> ()
+    public typealias SearchResult = (String) -> ()
     
     private(set) lazy var containerView: UIView = {
         let view = UIView(frame: .zero)
@@ -104,6 +106,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     
     private(set) lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = self
         searchBar.backgroundImage = .init()
         searchBar.backgroundColor = .clear
         searchBar.tintColor = theme.searchColor
@@ -161,8 +164,9 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         }
     }
     public weak var delegate: TCPickerViewOutput?
-    public var closeAction: TCPickerView.CloseAction?
+    public var closeAction: CloseAction?
     public var completion: Completion?
+    public var searchResult: SearchResult?
     public var selection: Mode = .multiply
     public var theme: TCPickerViewThemeType = TCPickerViewDefaultTheme() {
         didSet {
@@ -329,6 +333,12 @@ extension TCPickerView {
         
         searchBar.isHidden = !isSearchEnabled
         change(theme)
+    }
+}
+
+extension TCPickerView: UISearchBarDelegate {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchResult?(searchText)
     }
 }
 

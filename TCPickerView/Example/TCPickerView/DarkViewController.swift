@@ -10,9 +10,9 @@ import UIKit
 import TCPickerView
 
 class DarkViewController: UIViewController, TCPickerViewOutput {
-    
     @IBOutlet private weak var avatarImageView: UIImageView!
     
+    private var filteredCars: [String] = []
     private let theme = TCPickerViewDarkTheme()
     @IBAction private func showButtonPressed(button: UIButton) {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
@@ -29,6 +29,7 @@ class DarkViewController: UIViewController, TCPickerViewOutput {
             "Ford C-Max Hybrid",
             "Ford Focus"
         ]
+        filteredCars = cars
         let values = cars.map { TCPickerView.Value(title: $0) }
         picker.values = values
         picker.theme = self.theme
@@ -36,10 +37,15 @@ class DarkViewController: UIViewController, TCPickerViewOutput {
         picker.selection = .multiply
         picker.isSearchEnabled = true
         picker.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
-        picker.completion = { (selectedIndexes) in
+        picker.completion = { [unowned self] selectedIndexes in
             for i in selectedIndexes {
-                print(values[i].title)
+                print(self.filteredCars[i])
             }
+        }
+        picker.searchResult = { [unowned self] searchText in
+            self.filteredCars = cars.filter { $0.contains(searchText) }
+            let values = filteredCars.map { TCPickerView.Value(title: $0) }
+            picker.values = values
         }
         picker.show()
     }
@@ -50,7 +56,7 @@ class DarkViewController: UIViewController, TCPickerViewOutput {
     //MARK: TCPickerViewDelegate methods
     
     func pickerView(_ pickerView: TCPickerViewInput, didSelectRowAtIndex index: Int) {
-        print("Uuser select row at index: \(index)")
+        print("User select row at index: \(index)")
     }
     
     func pickerView(_ pickerView: TCPickerViewInput,
