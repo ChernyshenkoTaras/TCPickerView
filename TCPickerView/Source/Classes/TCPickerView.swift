@@ -24,6 +24,7 @@ public extension TCPickerViewOutput {
 public protocol TCPickerViewInput {
     var values: [TCPickerView.Value] { set get }
     var selection: TCPickerView.Mode { set get } // none / single / multiply
+    var isSearchEnabled: Bool { set get }
     var completion: TCPickerView.Completion? { set get } // use it to get result after user press Done
     var closeAction: TCPickerView.CloseAction? { set get }
     var delegate: TCPickerViewOutput? { set get }
@@ -47,20 +48,19 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     public typealias Completion = ([Int]) -> Void
     public typealias CloseAction = () -> ()
     
-    private(set) lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.text = "Select"
-        label.textAlignment = .center
-        label.text = title
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private(set) lazy var containerView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.white
         view.clipsToBounds = true
         return view
+    }()
+    
+    private(set) lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "Select"
+        label.textAlignment = .center
+        label.text = title
+        return label
     }()
     
     private(set) lazy var tableView: UITableView = {
@@ -76,7 +76,6 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
             top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorStyle = .none
         tableView.tintColor = .clear
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -85,7 +84,6 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         button.addTarget(self, action: #selector(TCPickerView.done), for: .touchUpInside)
         button.setTitle("Done", for: .normal)
         button.titleLabel?.textAlignment = .center
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -94,17 +92,57 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         button.addTarget(self, action: #selector(TCPickerView.close), for: .touchUpInside)
         button.setTitle("Close", for: .normal)
         button.titleLabel?.textAlignment = .center
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private(set) lazy var headerSeparator: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         return view
     }()
     
-    private(set) var headerHC: NSLayoutConstraint!
+    private(set) lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.backgroundImage = .init()
+        searchBar.backgroundColor = .clear
+        searchBar.tintColor = theme.searchColor
+        searchBar.textField?.textColor = theme.searchColor
+        searchBar.textField?.leftView?.tintColor = theme.searchColor
+        return searchBar
+    }()
+    
+    private lazy var containerStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            headerView,
+            searchBar,
+            headerSeparator,
+            tableView,
+            footerView
+        ])
+        stackView.axis = .vertical
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
+    private(set) lazy var headerView: UIView = {
+        let header = UIView(frame: .zero)
+        let stackView = UIStackView(arrangedSubviews: [titleLabel])
+        stackView.axis = .vertical
+        header.addSubviewWithConstraints(stackView)
+        
+        return header
+    }()
+    
+    private(set) lazy var footerView: UIView = {
+        let footer = UIView(frame: .zero)
+        let stackView = UIStackView(arrangedSubviews: [doneButton, closeButton])
+        stackView.distribution = .fillEqually
+        stackView.axis = .horizontal
+        footer.addSubviewWithConstraints(stackView)
+        
+        return footer
+    }()
     
     public var values: [Value] = [] {
         didSet {
@@ -117,7 +155,11 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
             titleLabel.text = self.title
         }
     }
-    
+    public var isSearchEnabled: Bool = false {
+        didSet {
+            searchBar.isHidden = !isSearchEnabled
+        }
+    }
     public weak var delegate: TCPickerViewOutput?
     public var closeAction: TCPickerView.CloseAction?
     public var completion: Completion?
@@ -269,39 +311,58 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
 extension TCPickerView {
     fileprivate func setupUI() {
         addSubview(containerView)
-
-        containerView.addSubview(doneButton)
-        containerView.addSubview(closeButton)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(tableView)
-        containerView.addSubview(headerSeparator)
         containerView.center = CGPoint(
             x: self.center.x,
             y: self.center.y + self.frame.size.height
         )
-
-        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        headerHC = titleLabel.heightAnchor.constraint(equalToConstant: theme.headerHeight)
-        headerHC.isActive = true
-        headerSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        headerSeparator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        headerSeparator.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        headerSeparator.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
-        doneButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        doneButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        doneButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true
-        doneButton.heightAnchor.constraint(equalToConstant: Consts.buttonsHeight).isActive = true
-        closeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true
-        closeButton.heightAnchor.constraint(equalToConstant: Consts.buttonsHeight).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: headerSeparator.bottomAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor).isActive = true
+        containerView.addSubviewWithConstraints(containerStackView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.heightAnchor.constraint(
+            equalToConstant: theme.headerHeight,
+            identifier: .height
+        ).isActive = true
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.heightAnchor.constraint(
+            equalToConstant: 50.0,
+            identifier: .height
+        ).isActive = true
         
+        searchBar.isHidden = !isSearchEnabled
         change(theme)
+    }
+}
+
+fileprivate extension UIView {
+    func addSubviewWithConstraints(_ view: UIView,
+                                   leading: CGFloat = 0.0,
+                                   trailing: CGFloat = 0.0,
+                                   top: CGFloat = 0.0,
+                                   bottom: CGFloat = 0.0) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leading).isActive = true
+        view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailing).isActive = true
+        view.topAnchor.constraint(equalTo: topAnchor, constant: top).isActive = true
+        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottom).isActive = true
+    }
+}
+
+extension UISearchBar {
+    var textField: UITextField? {
+        if #available(iOS 13.0, *) {
+            return searchTextField
+        }
+
+        guard let firstSubview = subviews.first else {
+            return nil
+        }
+
+        for view in firstSubview.subviews {
+            if let textView = view as? UITextField {
+                return textView
+            }
+        }
+
+        return nil
     }
 }

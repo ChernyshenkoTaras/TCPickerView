@@ -10,6 +10,7 @@
 		17FF68139E6CE30D906C3BA141F73817 /* TCPickerView+Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A14A4CA86FE4639836F6D142D7E6FF7 /* TCPickerView+Mode.swift */; };
 		2546AE6CA119405522DA66686DE7FC2E /* TCPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A72A72D139B6A1CED763C4357EA0D5 /* TCPickerView.swift */; };
 		2BC6E9934444A92B1EAF2A180C98FFAC /* TCPickerView+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A21C49C1D227A1C8BC33B6E3C1C506 /* TCPickerView+Value.swift */; };
+		63C10A25252EE27F005DDDA1 /* NSLayoutConstraint+Additional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C10A24252EE27F005DDDA1 /* NSLayoutConstraint+Additional.swift */; };
 		64664E933D0BCA9D11BED9691670F531 /* TCPickerView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A868A356CFA44FBF1C2877F6BA5F38E1 /* TCPickerView-dummy.m */; };
 		6F4189DF9B6B5CD5F319CFFDB0BFB2C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		721BCBD173E08731582D4A51210D2FCF /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA379DE8C59E96842B508824D50C1DD6 /* Media.xcassets */; };
@@ -47,28 +48,29 @@
 		0F5016B2DF53B79AB6E07188898DE99F /* TCPickerView+Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TCPickerView+Theme.swift"; path = "TCPickerView/Source/Classes/TCPickerView+Theme.swift"; sourceTree = "<group>"; };
 		1A14A4CA86FE4639836F6D142D7E6FF7 /* TCPickerView+Mode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TCPickerView+Mode.swift"; path = "TCPickerView/Source/Classes/TCPickerView+Mode.swift"; sourceTree = "<group>"; };
 		1E60A7B59D64B10A1C4DC703F6AADA30 /* Pods-TCPickerViewExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TCPickerViewExample-Info.plist"; sourceTree = "<group>"; };
-		1E65A9476D3C46B54BE6F4C2145E44FB /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TCPickerViewExample.framework; path = "Pods-TCPickerViewExample.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E65A9476D3C46B54BE6F4C2145E44FB /* Pods_TCPickerViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TCPickerViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		351872BC74AF5540E72AC7B14BE6E3A9 /* Pods-TCPickerViewExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TCPickerViewExample-acknowledgements.markdown"; sourceTree = "<group>"; };
 		380C2EBDFF7803657AA2CCFAA977A285 /* Pods-TCPickerViewExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TCPickerViewExample-frameworks.sh"; sourceTree = "<group>"; };
 		41E774306310CBBC4E5787DC4EF9CB8C /* TCPickerTableViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TCPickerTableViewCell.swift; path = TCPickerView/Source/Classes/TCPickerTableViewCell.swift; sourceTree = "<group>"; };
 		48934C5810CC2CB7F84F7EA5CF0C1DD9 /* Pods-TCPickerViewExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TCPickerViewExample.modulemap"; sourceTree = "<group>"; };
-		495E675D372C9B4B2DE4489449362ADC /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		4C6D8E4F4A30B67DC2A9287C3CA2D29D /* TCPickerView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TCPickerView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		495E675D372C9B4B2DE4489449362ADC /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4C6D8E4F4A30B67DC2A9287C3CA2D29D /* TCPickerView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = TCPickerView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		56DE26819F79566FF81B4802056134FB /* TCPickerViewThemeType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TCPickerViewThemeType.swift; sourceTree = "<group>"; };
 		571E944C69602FFB77C520A8564FD616 /* TCPickerView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TCPickerView-umbrella.h"; sourceTree = "<group>"; };
 		574BABBB571B00AC7CF2EB1673C9C9AA /* Pods-TCPickerViewExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TCPickerViewExample-umbrella.h"; sourceTree = "<group>"; };
-		8D6B1ED67035B5B321BDB6CD2CE8BA98 /* TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TCPickerView.framework; path = TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63C10A24252EE27F005DDDA1 /* NSLayoutConstraint+Additional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Additional.swift"; path = "TCPickerView/Source/Classes/NSLayoutConstraint+Additional.swift"; sourceTree = "<group>"; };
+		8D6B1ED67035B5B321BDB6CD2CE8BA98 /* TCPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90DC1DD02EC953A707AA21984F0F527E /* Pods-TCPickerViewExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TCPickerViewExample-acknowledgements.plist"; sourceTree = "<group>"; };
 		958F229F84968ED58B0C6C5BD81C35B7 /* Pods-TCPickerViewExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TCPickerViewExample-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A868A356CFA44FBF1C2877F6BA5F38E1 /* TCPickerView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TCPickerView-dummy.m"; sourceTree = "<group>"; };
 		BA379DE8C59E96842B508824D50C1DD6 /* Media.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = TCPickerView/Source/Resources/Media.xcassets; sourceTree = "<group>"; };
-		C5950F0D10543EE73EF0FE66CEBD875B /* TCPickerView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TCPickerView.bundle; path = "TCPickerView-TCPickerView.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5950F0D10543EE73EF0FE66CEBD875B /* TCPickerView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCPickerView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D796386533B8439C1E22E47ACB1F99 /* TCPickerViewLightTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TCPickerViewLightTheme.swift; sourceTree = "<group>"; };
 		CD5CABEC71CEAE554691BAD1B5D617CF /* TCPickerView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TCPickerView-prefix.pch"; sourceTree = "<group>"; };
 		D2A72A72D139B6A1CED763C4357EA0D5 /* TCPickerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TCPickerView.swift; path = TCPickerView/Source/Classes/TCPickerView.swift; sourceTree = "<group>"; };
-		D4ED71E2CCCE71EFA183D50263F0A06F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		D4ED71E2CCCE71EFA183D50263F0A06F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D5AC87EDA31BFB1E4ED3E0F902CA2514 /* Pods-TCPickerViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCPickerViewExample.release.xcconfig"; sourceTree = "<group>"; };
 		D8C7BC301F9812364FF4B4D3FBB66D53 /* TCPickerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TCPickerView.release.xcconfig; sourceTree = "<group>"; };
 		E5C0F4459ED1A5DA6752196C2EF2D764 /* Pods-TCPickerViewExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TCPickerViewExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				1A14A4CA86FE4639836F6D142D7E6FF7 /* TCPickerView+Mode.swift */,
 				0F5016B2DF53B79AB6E07188898DE99F /* TCPickerView+Theme.swift */,
 				E8A21C49C1D227A1C8BC33B6E3C1C506 /* TCPickerView+Value.swift */,
+				63C10A24252EE27F005DDDA1 /* NSLayoutConstraint+Additional.swift */,
 				B0D85F4340296756327919DDEFC98837 /* Pod */,
 				A4136865E3267813605306DBB207CC2A /* Resources */,
 				D4A059097658641DC0D139B701B598C9 /* Support Files */,
@@ -396,6 +399,7 @@
 				2BC6E9934444A92B1EAF2A180C98FFAC /* TCPickerView+Value.swift in Sources */,
 				64664E933D0BCA9D11BED9691670F531 /* TCPickerView-dummy.m in Sources */,
 				2546AE6CA119405522DA66686DE7FC2E /* TCPickerView.swift in Sources */,
+				63C10A25252EE27F005DDDA1 /* NSLayoutConstraint+Additional.swift in Sources */,
 				C9D2A0879B06C44577E101E1B3EC5063 /* TCPickerViewDarkTheme.swift in Sources */,
 				C85D076CF052855128597FECADCBB107 /* TCPickerViewLightTheme.swift in Sources */,
 				74C6F46A6B062876AC63AFA0981F840A /* TCPickerViewThemeType.swift in Sources */,
@@ -571,8 +575,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

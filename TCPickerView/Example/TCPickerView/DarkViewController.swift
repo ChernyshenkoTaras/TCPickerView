@@ -34,6 +34,7 @@ class DarkViewController: UIViewController, TCPickerViewOutput {
         picker.theme = self.theme
         picker.delegate = self
         picker.selection = .multiply
+        picker.isSearchEnabled = true
         picker.register(UINib(nibName: "ExampleTableViewCell", bundle: nil), forCellReuseIdentifier: "ExampleTableViewCell")
         picker.completion = { (selectedIndexes) in
             for i in selectedIndexes {

@@ -27,6 +27,7 @@ public protocol TCPickerViewThemeType {
     var headerHeight: CGFloat { get }
     var cornerRadius: CGFloat { get }
     
+    var searchColor: UIColor {  get }
     init()
 }
 
@@ -95,4 +96,7 @@ extension TCPickerViewThemeType {
         return 15.0
     }
     
+    public var searchColor: UIColor {
+        return .black
+    }
 }

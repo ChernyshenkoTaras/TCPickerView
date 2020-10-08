@@ -25,6 +25,9 @@ extension TCPickerView {
         closeButton.setTitle(theme.closeText, for: .normal)
         closeButton.titleLabel?.font = theme.buttonsFont
         headerSeparator.backgroundColor = theme.separatorColor
-        headerHC.constant = theme.headerHeight
+        headerView.constraint(withIdentifier: .height)?.constant = theme.headerHeight
+        searchBar.textField?.textColor = theme.searchColor
+        searchBar.textField?.leftView?.tintColor = theme.searchColor
+        searchBar.tintColor = theme.searchColor
     }
 }

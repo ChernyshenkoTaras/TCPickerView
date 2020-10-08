@@ -68,5 +68,9 @@ public final class TCPickerViewDarkTheme: TCPickerViewThemeType {
         return 8.0
     }
     
+    public var searchColor: UIColor {
+        return textColor
+    }
+    
     public required init() {}
 }
