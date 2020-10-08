@@ -1,5 +1,5 @@
 PODS:
-  - TCPickerView (0.2.5)
+  - TCPickerView (0.2.7)
 
 DEPENDENCIES:
   - TCPickerView (from `../../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  TCPickerView: dae0730870a7f8a2bb922a2592d5e3d1a85ff9c4
+  TCPickerView: d28446cd18a07c30e40669561fa7cbb221e16e32
 
 PODFILE CHECKSUM: 1093d945dd922e563840be5dd00f923141c67062
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1

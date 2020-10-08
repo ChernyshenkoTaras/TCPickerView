@@ -39,44 +39,82 @@ public protocol TCPickerViewInput {
 
 open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCPickerViewInput {
     
-    public enum Mode {
-        case none
-        case single
-        case multiply
+    private struct Consts {
+        static let buttonsHeight: CGFloat = 50.0
+        static let tableViewCellIdentifier = "TableViewCell"
     }
-    
-    public struct Value {
-        public let title: String
-        public var isChecked: Bool
-        
-        public init(title: String, isChecked: Bool = false) {
-            self.title = title
-            self.isChecked = isChecked
-        }
-    }
-    
+
     public typealias Completion = ([Int]) -> Void
     public typealias CloseAction = () -> ()
-    fileprivate let tableViewCellIdentifier = "TableViewCell"
-    fileprivate var titleLabel: UILabel?
-    fileprivate var doneButton: UIButton?
-    fileprivate var closeButton: UIButton?
-    fileprivate var containerView: UIView?
-    fileprivate var centerXConstraint: NSLayoutConstraint?
-    fileprivate var centerYConstraint: NSLayoutConstraint?
-    fileprivate var tableView: UITableView?
-    fileprivate var headerSeparator: UIView?
-    fileprivate var headerHC: NSLayoutConstraint?
+    
+    private(set) lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.text = "Select"
+        label.textAlignment = .center
+        label.text = title
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private(set) lazy var containerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.white
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private(set) lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(
+            TCPickerTableViewCell.self,
+            forCellReuseIdentifier: Consts.tableViewCellIdentifier
+        )
+        tableView.tableFooterView = UIView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorInset = UIEdgeInsets(
+            top: 0, left: 0, bottom: 0, right: 0)
+        tableView.separatorStyle = .none
+        tableView.tintColor = .clear
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private(set) lazy var doneButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.addTarget(self, action: #selector(TCPickerView.done), for: .touchUpInside)
+        button.setTitle("Done", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private(set) lazy var closeButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.addTarget(self, action: #selector(TCPickerView.close), for: .touchUpInside)
+        button.setTitle("Close", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private(set) lazy var headerSeparator: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private(set) var headerHC: NSLayoutConstraint!
     
     public var values: [Value] = [] {
         didSet {
-            self.tableView?.reloadData()
+            tableView.reloadData()
         }
     }
 
     public var title: String = "Select" {
         didSet {
-            self.titleLabel?.text = self.title
+            titleLabel.text = self.title
         }
     }
     
@@ -86,7 +124,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     public var selection: Mode = .multiply
     public var theme: TCPickerViewThemeType = TCPickerViewDefaultTheme() {
         didSet {
-            self.updateUI()
+            change(theme)
         }
     }
 
@@ -107,41 +145,21 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
             containerFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         }
         super.init(frame: frame)
-        self.initialize(frame: containerFrame)
+        containerView.frame = containerFrame
+        setupUI()
     }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.initialize(frame: frame)
+        containerView.frame = frame
+        setupUI()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initialize(frame: CGRect.zero)
+        setupUI()
     }
 
-    fileprivate func initialize(frame: CGRect) {
-        self.containerView = UIView(frame: frame)
-        self.doneButton = UIButton(frame: CGRect.zero)
-        self.closeButton = UIButton(frame: CGRect.zero)
-        self.titleLabel = UILabel(frame: CGRect.zero)
-        self.tableView = UITableView(frame: CGRect.zero)
-        self.headerSeparator = UIView(frame: CGRect.zero)
-        
-        self.tableView?.register(TCPickerTableViewCell.self,
-            forCellReuseIdentifier: self.tableViewCellIdentifier)
-        self.tableView?.tableFooterView = UIView()
-        self.tableView?.dataSource = self
-        self.tableView?.delegate = self
-        
-        self.doneButton?.addTarget(self, action: #selector(TCPickerView.done),
-            for: .touchUpInside)
-        self.closeButton?.addTarget(self, action: #selector(TCPickerView.close),
-            for: .touchUpInside)
-        self.setupUI()
-        self.updateUI()
-    }
-    
     open func show() {
         guard let appDelegate = UIApplication.shared.delegate else {
             assertionFailure()
@@ -158,23 +176,27 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         UIView.animate(withDuration: 0.3, delay: 0.0,
             usingSpringWithDamping: 0.7, initialSpringVelocity: 3.0,
             options: .allowAnimatedContent, animations: {
-            self.containerView?.center = self.center
-            self.tableView?.reloadData()
+            self.containerView.center = self.center
+            self.tableView.reloadData()
         }) { (isFinished) in
             self.layoutIfNeeded()
         }
     }
     
     open func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
-        self.tableView?.register(nib, forCellReuseIdentifier: identifier)
+        tableView.register(nib, forCellReuseIdentifier: identifier)
     }
     
     open func registerCell(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String) {
-        self.tableView?.register(cellClass, forCellReuseIdentifier: identifier)
+        tableView.register(cellClass, forCellReuseIdentifier: identifier)
     }
     
-    open func dequeue(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType {
-        return self.tableView!.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! UITableViewCell & TCPickerCellType
+    open func dequeue(withIdentifier identifier: String,
+        for indexPath: IndexPath) -> UITableViewCell & TCPickerCellType {
+        return tableView.dequeueReusableCell(
+            withIdentifier: identifier,
+            for: indexPath
+        ) as! UITableViewCell & TCPickerCellType
     }
     
     @objc private func done() {
@@ -197,7 +219,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         UIView.animate(withDuration: 0.7, delay: 0.0,
             usingSpringWithDamping: 1, initialSpringVelocity: 1.0,
             options: .allowAnimatedContent, animations: {
-            self.containerView?.center = CGPoint(x: self.center.x, y: self.center.y + self.frame.size.height)
+            self.containerView.center = CGPoint(x: self.center.x, y: self.center.y + self.frame.size.height)
         }) { (isFinished) in
             self.removeFromSuperview()
         }
@@ -209,11 +231,12 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
         return self.values.count
     }
     
-    public func tableView(_ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let value = self.values[indexPath.row]
-        var cell: UITableViewCell & TCPickerCellType = tableView.dequeueReusableCell(withIdentifier:
-            self.tableViewCellIdentifier, for: indexPath) as! TCPickerTableViewCell
+        var cell: UITableViewCell & TCPickerCellType = tableView.dequeueReusableCell(
+            withIdentifier: Consts.tableViewCellIdentifier,
+            for: indexPath
+        ) as! TCPickerTableViewCell
         if let customCell = self.delegate?.pickerView(self, cellForRowAt: indexPath) {
             cell = customCell
         }
@@ -226,9 +249,7 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     
     //MARK: UITableViewDelegate methods
     
-    public func tableView(_ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var values = self.values
         switch self.selection {
             case .none: return
@@ -245,141 +266,42 @@ open class TCPickerView: UIView, UITableViewDataSource, UITableViewDelegate, TCP
     }
 }
 
-//MARK: - Appearance
-
 extension TCPickerView {
     fileprivate func setupUI() {
-        guard let containerView = self.containerView,
-            let doneButton = self.doneButton,
-            let closeButton = self.closeButton,
-            let titleLabel = self.titleLabel,
-            let tableView = self.tableView,
-            let headerSeparator = self.headerSeparator else {
-                return
-        }
-        
-        self.addSubview(containerView)
+        addSubview(containerView)
+
         containerView.addSubview(doneButton)
         containerView.addSubview(closeButton)
         containerView.addSubview(titleLabel)
         containerView.addSubview(tableView)
         containerView.addSubview(headerSeparator)
+        containerView.center = CGPoint(
+            x: self.center.x,
+            y: self.center.y + self.frame.size.height
+        )
+
+        titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        headerHC = titleLabel.heightAnchor.constraint(equalToConstant: theme.headerHeight)
+        headerHC.isActive = true
+        headerSeparator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        headerSeparator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        headerSeparator.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        headerSeparator.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor).isActive = true
+        doneButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        doneButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        doneButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true
+        doneButton.heightAnchor.constraint(equalToConstant: Consts.buttonsHeight).isActive = true
+        closeButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        closeButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        closeButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.5).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: Consts.buttonsHeight).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: headerSeparator.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor).isActive = true
         
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        headerSeparator.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.containerView?.center = CGPoint(x: self.center.x,
-            y: self.center.y + self.frame.size.height)
-        
-        //titles
-        containerView.addConstraint(NSLayoutConstraint(item: titleLabel,
-            attribute: .top, relatedBy: .equal, toItem: containerView,
-            attribute: .top, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: titleLabel,
-            attribute: .leading, relatedBy: .equal, toItem: containerView,
-            attribute: .leading, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: titleLabel,
-            attribute: .trailing, relatedBy: .equal, toItem: containerView,
-            attribute: .trailing, multiplier: 1.0, constant: 0))
-        self.headerHC = NSLayoutConstraint(item: titleLabel,
-                           attribute: .height, relatedBy: .equal, toItem: nil,
-                           attribute: .height, multiplier: 1.0, constant: 70)
-        titleLabel.addConstraint(self.headerHC!)
-        
-        headerSeparator.addConstraint(NSLayoutConstraint(item: headerSeparator,
-            attribute: .height, relatedBy: .equal, toItem: nil,
-            attribute: .height, multiplier: 1.0, constant: 0.5))
-        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
-            attribute: .top, relatedBy: .equal, toItem: titleLabel,
-            attribute: .bottom, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
-             attribute: .leading, relatedBy: .equal, toItem: titleLabel,
-             attribute: .leading, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
-            attribute: .trailing, relatedBy: .equal, toItem: titleLabel,
-            attribute: .trailing, multiplier: 1.0, constant: 0))
-        
-        //buttons
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .trailing, relatedBy: .equal, toItem: doneButton,
-            attribute: .trailing, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .bottom, relatedBy: .equal, toItem: doneButton,
-            attribute: .bottom, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: doneButton,
-            attribute: .width, relatedBy: .equal, toItem: containerView,
-            attribute: .width, multiplier: 0.5, constant: 0))
-        doneButton.addConstraint(NSLayoutConstraint(item: doneButton,
-            attribute: .height, relatedBy: .equal, toItem: nil,
-            attribute: .height, multiplier: 1.0, constant: 50))
-        
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .leading, relatedBy: .equal, toItem: closeButton,
-            attribute: .leading, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .bottom, relatedBy: .equal, toItem: closeButton,
-            attribute: .bottom, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: closeButton,
-            attribute: .width, relatedBy: .equal, toItem: containerView,
-            attribute: .width, multiplier: 0.5, constant: 0))
-        closeButton.addConstraint(NSLayoutConstraint(item: closeButton,
-            attribute: .height, relatedBy: .equal, toItem: nil,
-            attribute: .height, multiplier: 1.0, constant: 50))
-        
-        //tableView
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .trailing, relatedBy: .equal, toItem: tableView,
-            attribute: .trailing, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: containerView,
-            attribute: .leading, relatedBy: .equal, toItem: tableView,
-            attribute: .leading, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: headerSeparator,
-            attribute: .bottom, relatedBy: .equal, toItem: tableView,
-            attribute: .top, multiplier: 1.0, constant: 0))
-        containerView.addConstraint(NSLayoutConstraint(item: closeButton,
-            attribute: .top, relatedBy: .equal, toItem: tableView,
-            attribute: .bottom, multiplier: 1.0, constant: 0))
-    }
-    
-    fileprivate func updateUI() {
-        self.containerView?.backgroundColor = UIColor.white
-        self.containerView?.layer.cornerRadius = self.theme.cornerRadius
-        self.containerView?.clipsToBounds = true
-        self.titleLabel?.text = "Select"
-        self.doneButton?.setTitle("Done", for: .normal)
-        self.closeButton?.setTitle("Close", for: .normal)
-        
-        self.doneButton?.titleLabel?.textAlignment = .center
-        self.closeButton?.titleLabel?.textAlignment = .center
-        self.titleLabel?.textAlignment = .center
-        
-        self.titleLabel?.textColor = self.theme.titleColor
-        self.doneButton?.setTitleColor(self.theme.doneTextColor, for: .normal)
-        self.closeButton?.setTitleColor(self.theme.closeTextColor, for: .normal)
-        
-        self.titleLabel?.text = self.title
-        self.doneButton?.setTitle(self.theme.doneText, for: .normal)
-        self.closeButton?.setTitle(self.theme.closeText, for: .normal)
-        
-        self.titleLabel?.backgroundColor = self.theme.headerBackgroundColor
-        self.doneButton?.backgroundColor = self.theme.doneBackgroundColor
-        self.closeButton?.backgroundColor = self.theme.closeBackgroundColor
-        self.headerSeparator?.backgroundColor = self.theme.separatorColor
-        
-        self.titleLabel?.font = self.theme.titleFont
-        self.doneButton?.titleLabel?.font = self.theme.buttonsFont
-        self.closeButton?.titleLabel?.font = self.theme.buttonsFont
-        
-        self.tableView?.separatorInset = UIEdgeInsets(
-            top: 0, left: 0, bottom: 0, right: 0)
-        self.tableView?.rowHeight = self.theme.rowHeight
-        self.tableView?.separatorStyle = .none
-        self.tableView?.tintColor = .clear
-        self.tableView?.backgroundColor = self.theme.backgroundColor
-        self.containerView?.backgroundColor = self.theme.backgroundColor
-        self.headerHC?.constant = self.theme.headerHeight
+        change(theme)
     }
 }
