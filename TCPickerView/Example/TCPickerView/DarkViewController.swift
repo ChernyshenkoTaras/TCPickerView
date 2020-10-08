@@ -53,6 +53,7 @@ class DarkViewController: UIViewController, TCPickerViewOutput {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+
     //MARK: TCPickerViewDelegate methods
     
     func pickerView(_ pickerView: TCPickerViewInput, didSelectRowAtIndex index: Int) {

@@ -109,7 +109,24 @@ var titleFont: UIFont { get }
 var rowHeight: CGFloat { get }
 var headerHeight: CGFloat { get }
 var cornerRadius: CGFloat { get }
+
+var searchColor: UIColor { get }
 ```
+
+#### Search
+
+This library provides easy to use search box. You can enable it by using `isSearchEnabled` property and then subscribe to `searchResult: TCPicker.SearchResult` closure.
+
+```swift
+    picker.isSearchEnabled = true
+    picker.searchResult = { [unowned self] searchText in
+        self.filteredCars = cars.filter { $0.contains(searchText) }
+        let values = filteredCars.map { TCPickerView.Value(title: $0) }
+        picker.values = values
+    }
+```
+Feel free to refer `DarkViewController` for the usage example. Or you can implement `UISearchBarDelegate` delegate methods in your controller and assign `searchBar.delegate` to it e.g. `picker.searchBar.delegate = self`
+
 #### Use your own cells
 
 * desing your cell in .xib or code
